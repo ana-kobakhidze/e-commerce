@@ -1,0 +1,141 @@
+.CategoryBody {
+  margin-top: 80px;
+  position: absolute;
+  top: 80px;
+  left: 101px;
+  padding: 0px;
+  width: 1440px;
+}
+
+.CategoryTitle {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 42px;
+  color: #1d1f22;
+}
+
+.ProductList {
+  display: inline-flex;
+  align-items: flex-start;
+  padding: 0px;
+  margin: 0 100px 100px 0;
+  width: 354px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-evenly;
+}
+
+.ProductList:hover {
+  box-shadow: 0 1px 10px #ccc;
+  cursor: pointer;
+}
+
+.ListWraper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 0;
+}
+.ListWraper .image_inStock .image_outOfStock {
+  padding: 10px;
+  text-align: center;
+}
+
+.ListWraper img {
+  padding: 10px;
+  text-align: center;
+  width: 354px;
+  height: 330px;
+  object-fit: cover;
+  object-position: top;
+}
+.Overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 330px;
+  width: 354px;
+  background: #ffffff;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Overlay p {
+  color: #8d8f9a;
+  font-size: 24px;
+  line-height: 160%;
+}
+.CartIcon :last-child {
+  z-index: 1;
+}
+
+.CartCircle {
+  z-index: 1;
+  filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.1));
+  position: absolute;
+  height: 52px;
+  width: 52px;
+  left: 280px;
+  top: 304px;
+  border: none;
+  background-color: #5ece7b;
+  border-radius: 50px;
+}
+.EmptyCart {
+  z-index: 2;
+  height: 15.6px;
+  position: absolute;
+  left: 293px;
+  top: 319px;
+}
+.CartWheelOne {
+  z-index: 2;
+  position: absolute;
+  left: 300px;
+  top: 335px;
+}
+.CartWheelTwo {
+  z-index: 2;
+  position: absolute;
+  left: 309px;
+  top: 335px;
+}
+
+.ItemInfo {
+  display: flex;
+  flex-direction: column;
+}
+.ItemInfo .Brand {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  padding: 0 10px;
+  margin: 0;
+}
+.ItemInfo .Name {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 160%;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.ItemInfo .Price {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  padding: 0 10px;
+  margin: 0;
+  margin-bottom: 25px;
+}

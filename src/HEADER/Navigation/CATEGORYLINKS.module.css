@@ -1,0 +1,59 @@
+.HeaderNav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px;
+  position: absolute;
+  width: 234px;
+  height: 56px;
+  left: 45px;
+  bottom: 0px;
+  padding: 2em;
+}
+
+.Link {
+  position: static;
+  height: 20px;
+  left: 0%;
+  right: 0%;
+  top: calc(50% - 20px / 2 - 16px);
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 120%;
+  padding: 0 30px;
+  text-transform: uppercase;
+  color: #1d1f22;
+}
+.ClickedShape {
+  position: static;
+  height: 2px;
+  left: 0%;
+  right: 0%;
+  bottom: 0px;
+  background: #5ece7b;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 30px 0px;
+}
+
+.Link:hover {
+  cursor: pointer;
+  color: #5ece7b;
+}
+
+.ClickedLink {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  padding: 17px 30px 18px 30px;
+  text-transform: uppercase;
+  color: #5ece7b;
+  border-bottom: 2px solid #5ece7b;
+}
