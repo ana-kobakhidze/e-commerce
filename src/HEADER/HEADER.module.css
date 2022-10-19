@@ -1,54 +1,18 @@
 .Header {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 1440px;
-  height: 80px;
-  left: 0px;
-  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  width: 1260px;
+  margin-top:6px;
 }
 
 .BrandIcon {
+  position: relative;
+  right: 10%;
   width: 41px;
   height: 41px;
-  position: absolute;
-  width: 41px;
-  left: calc(50% - 41px / 2);
-  bottom: 0%;
-}
-
-.IconBack {
-  position: absolute;
-  left: 6.3%;
-  right: 6.6%;
-  top: 0%;
-  bottom: 20.98%;
-  border-radius: 2px;
-  z-index: 100;
-}
-.IconFront {
-  position: absolute;
-  left: 0%;
-  right: -0.07%;
-  top: 4.33%;
-  bottom: 0.83%;
-  border-radius: 2px;
-  z-index: 101;
-}
-.IconArrow {
-  position: absolute;
-  left: 21%;
-  right: 29.25%;
-  top: 35%;
-  bottom: 29.47%;
-  z-index: 102;
-}
-.IconArrowHead {
-  position: absolute;
-  left: 49%;
-  top: 28%;
-  bottom: 58.17%;
-  z-index: 103;
+  background: url("../assets/icons/BrandIcon.svg");
 }
 
 .Actions {
@@ -56,45 +20,21 @@
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  padding: 0px;
-
-  position: absolute;
-  width: 204px;
-  height: 40px;
-  right: 101px;
-  top: 29px;
+  
 }
 .Cart {
-  position: static;
   width: 20px;
   height: 20px;
-  right: 1px;
-  top: -20px;
-  flex: none;
-  order: 3;
-  flex-grow: 0;
-  margin: 0px 22px;
-  cursor: pointer;
-}
-.Basket {
-  cursor: pointer;
-}
-.WheelTwo {
-  position: absolute;
-  left: 86%;
-  right: 10.61%;
-  top: 60%;
-  bottom: 4.16%;
-  cursor: pointer;
-}
-.WheelOne {
-  position: absolute;
-  left: 82.5%;
-  top: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+  background: url("../assets/icons/EmptyCart.svg");
   cursor: pointer;
 }
 
-.ProductCounter {
+
+/* .ProductCounter {
   width: 20px;
   height: 20px;
   border-radius: 60px;
@@ -103,8 +43,8 @@
   top: 4px;
   left: 176px;
   cursor: pointer;
-}
-.NumberOfCounter {
+} */
+/* .NumberOfCounter {
   position: absolute;
   left: 6px;
   top: -11px;
@@ -117,8 +57,8 @@
   text-align: center;
   text-transform: uppercase;
   color: white;
-}
-.NumberOfCounterPosition {
+} */
+/* .NumberOfCounterPosition {
   position: absolute;
   left: 2px;
   top: -11px;
@@ -131,4 +71,4 @@
   text-align: center;
   text-transform: uppercase;
   color: white;
-}
+} */

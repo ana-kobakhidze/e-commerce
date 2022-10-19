@@ -46,12 +46,7 @@ class Currency extends Component {
   }
 
   clickedCurrencyHandler(currency) {
-    let symbol =
-      currency === "AUD"
-        ? "A" + getSymbolFromCurrency(currency)
-        : getSymbolFromCurrency(currency);
-
-    this.props.currentCurrencyIcon(symbol);
+    this.props.currentCurrencyIcon(currency.symbol);
     this.props.toggleDropDownButton(false);
   }
 
@@ -68,34 +63,18 @@ class Currency extends Component {
             key={index}
             onClick={() => this.clickedCurrencyHandler(element)}
           >
-            {element === "AUD"
-              ? "A" + getSymbolFromCurrency(element) + " " + element
-              : getSymbolFromCurrency(element) + " " + element}
+              {element.label + '  ' + element.symbol}
           </p>
         );
       });
 
     return (
-      <div>
+      <div className={styles.CurrenyWrapper}>
         <p className={styles.Currency} onClick={this.arrowClickHandler}>
           {this.props.currency}
         </p>
-        <svg
-          onClick={this.arrowClickHandler}
-          className={styles.DownArrow}
-          width="9"
-          height="5"
-          viewBox="0 0 8 4"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M1 0.5L4 3.5L7 0.5"
-            stroke="black"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        
+        <div className={toggleDropDown ? styles.DownArrow : styles.UpArrow} onClick={this.arrowClickHandler}></div>
 
         {this.props.showModal === false && (
           <div className={styles.Background} onClick={this.closeClickHandler}>
