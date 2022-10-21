@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300&display=swap");
+
+.CartTitle {
+  position: absolute;
+  width: 84px;
+  height: 40px;
+  left: 100px;
+  top: 160px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #1d1f22;
+}
+
+.Hr {
+  position: relative;
+  width: 1217px;
+  height: 1px;
+  left: 0px;
+  top: 0px;
+  background: #e5e5e5;
+}
+.DeleteButton {
+  display: none;
+}
+
+.ItemListWraper {
+  position: relative;
+  left: 102px;
+  top: 240px;
+  width: 1217px;
+  height: 421px;
+}
+
+.ItemListWraper:hover + .DeleteButton,
+.DeleteButton:hover {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  left: 103px;
+  bottom: 154px;
+  width: 20px;
+  font-size: 10px;
+  height: 20px;
+  text-align: center;
+  background-color: black;
+  border: 1px solid #393a42;
+  color: #fff;
+  font-weight: 600;
+}
+
+.BrandName {
+  width: 292px;
+  height: 27px;
+  position: absolute;
+  top: 26px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  color: #1d1f22;
+}
+
+.ItemName {
+  position: absolute;
+  width: 400px;
+  height: 27px;
+  left: 0px;
+  top: 67px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  color: #1d1f22;
+}
+
+.ItemPrice {
+  position: absolute;
+  width: 86px;
+  height: 46px;
+  left: 0px;
+  top: 103px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #1d1f22;
+}
+.AttributesName {
+  position: absolute;
+  width: 182px;
+  bottom: 94px;
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 18px;
+  color: #1d1f22;
+}
+.PlusBox {
+  height: 45px;
+  width: 45px;
+  position: absolute;
+  right: 158px;
+  top: 58px;
+  background-color: white;
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.Vertical {
+  position: absolute;
+  right: 180px;
+  top: 71px;
+  border: 1px solid #1d1f22;
+  stroke-linecap: round;
+}
+
+.Horizontal {
+  position: absolute;
+  left: 1027px;
+  top: 78px;
+  border: 1px solid #1d1f22;
+  stroke-linecap: round;
+}
+
+.Count {
+  position: absolute;
+  left: 1029px;
+  top: 106px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 160%;
+  color: #1d1f22;
+}
+
+.MinusBox {
+  height: 45px;
+  width: 45px;
+  border-radius: 0px;
+  position: absolute;
+  left: 1015px;
+  top: 199px;
+  background-color: white;
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.HorizontalMinus {
+  position: absolute;
+  left: 1029px;
+  top: 221px;
+  border: 1px solid #1d1f22;
+}
+.ProductImage {
+  height: 185px;
+  width: 141px;
+  position: absolute;
+  left: 1075px;
+  top: 58px;
+  object-fit: cover;
+  object-position: 70% 100%;
+}
+
+.LeftArrow {
+  position: absolute;
+  left: 1088px;
+  top: 143px;
+  cursor: pointer;
+}
+
+.RightArrow {
+  position: absolute;
+  left: 1197px;
+  top: 143px;
+  cursor: pointer;
+}
+
+.CategoryAttributesWraper {
+  display: flex;
+  flex-direction: row;
+  height: 83px;
+  position: relative;
+  top: 213px;
+  justify-content: flex-start;
+}
+
+.SelectedAttrBox {
+  margin-right: 30px;
+  position: relative;
+  bottom: 20px;
+  width: 63px;
+  height: 45px;
+  border: 1px solid #808080;
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  color: #a6a6a6;
+  background: #e8e8e8;
+  pointer-events: none;
+}
+.colorAttrBox {
+  margin-right: 30px;
+  width: 63px;
+  height: 45px;
+  position: relative;
+  bottom: 20px;
+  background-color: white;
+  color: #a6a6a6;
+  border: 2px solid #1d1f22;
+}
+
+.ColorAttrBoxSelected {
+  margin-right: 30px;
+  position: relative;
+  bottom: 20px;
+  width: 63px;
+  height: 45px;
+  background-color: white;
+  color: #a6a6a6;
+  border: 1px solid #1d1f22;
+}
+.attributeBoxOrg {
+  margin-right: 30px;
+  position: relative;
+  bottom: 20px;
+  width: 63px;
+  height: 45px;
+  background-color: white;
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  color: #242424;
+  border: 0.5px solid #1d1f22;
+}
+
+.attributeBoxOrg:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}

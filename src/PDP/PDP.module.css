@@ -1,0 +1,201 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@300&display=swap");
+.PdpWrapper{
+  display: flex;
+  justify-content: space-between;
+  width: 1260px;
+  margin-top: 4.5em;
+}
+.List {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+  justify-content: space-between;
+  margin-left: 10px;
+  height: 597px;
+
+}
+.ImageList {
+  width: 79px;
+  height: 80px;
+  margin-bottom: 33px;
+  cursor: pointer;
+  object-fit: contain;
+}
+.Main {
+  object-fit: contain;
+  width: 610px;
+  height: 511px;
+  margin-right: 3em;
+}
+
+.MainImage {
+  position:absolute;
+  width: 610px;
+  height: 515px;
+  object-fit: contain;
+  z-index:1;
+}
+
+.mainImageOverlay {
+  width: 610px;
+  height: 515px;
+  background: #ffffff;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position:absolute;
+  z-index: 1;
+}
+
+.mainImageOverlay p {
+  color: #393a42;
+  font-size: 24px;
+  line-height: 160%;
+  position:absolute;
+  z-index: 1;
+}
+
+.RightBar {
+  width: 34%;
+
+}
+.Brand {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  margin-top: 0;
+}
+.Name {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 27px;
+  margin: 0.5em 0;
+}
+.Size {
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+
+}
+.Price {
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 18px;
+  color: #1d1f22;
+  margin: 1.5em 0;
+}
+.PriceCurrency {
+  color: #1d1f22;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 18px;
+
+}
+.ActiveButton {
+  background-color: #5ece7b;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 32px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 300px;
+}
+.ActiveButton:hover {
+  background-color: #4ec16c;
+}
+.DisableButton {
+  background-color: #d3d3d3;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 32px;
+  border: none;
+  transition: 0.3s;
+  width: 300px;
+  pointer-events: none;
+}
+
+.Description {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 159.96%;
+  color: #1d1f22;
+  width: 300px;
+
+}
+
+.SelectedBox {
+  border: 1px solid #808080;
+  color: #a6a6a6;
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  width: 63px;
+  height: 45px;
+  margin-right:14px;
+  background: #e8e8e8;
+  pointer-events: "none";
+  cursor: pointer;
+}
+
+.colorBox {
+  border: 2px solid #1d1f22;
+  color: #a6a6a6;
+  background-color: white;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  margin-right:14px;
+}
+.ColorBoxSelected {
+  border: 1px solid #1d1f22;
+  color: #a6a6a6;
+  background-color: white;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  margin-right:14px;
+}
+.attributeBox {
+  text-decoration: none;
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  border: 0.5px solid #1d1f22;
+  color: #a6a6a6;
+  background-color: white;
+  cursor: pointer;
+  width: 63px;
+  height: 45px;
+  margin-right:14px;
+}
+
+.attributeBox:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}

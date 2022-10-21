@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { gql } from "@apollo/client";
 
-import styles from "./CATEGORY.module.css";
+import styles from "./PLP.module.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -161,8 +161,8 @@ class Category extends Component {
                   className={styles.ItemInfo}
                   onClick={() => this.handleClick(item.id)}
                 >
-                  <p className={styles.Brand}>{item.brand}</p>
-                  <p className={styles.Name}>{item.name}</p>
+
+                  <p className={styles.Name}>{item.brand + ' ' + item.name}</p>
 
                   <p className={styles.Price}>
                     {this.props.currency + item.prices[0].amount}

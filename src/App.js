@@ -9,9 +9,9 @@ import { connect } from "react-redux";
 import "./App.css";
 
 import Header from "./HEADER/HEADER";
-import CATEGORY from "./CATEGORY/CATEGORY";
-
-
+import CATEGORY from "./PLP/PLP";
+import PDP from "../src/PDP/PDP";
+import CART from "../src/CART/CART";
 
 class App extends Component {
   render() {
@@ -23,20 +23,21 @@ class App extends Component {
             <Route
               path="/"
               render={() => {
+                console.log(this.props.cartClick)
                 return this.props.cartClick === "" ||
                   this.props.cartClick === "TAB_IS_CLICKED" ? (
                   ((<Redirect to={"/" + this.props.tabName} />),
                   (<CATEGORY client={this.props.client} />))
                 ) : this.props.cartClick === "ADD_TO_CART" ||
                   this.props.cartClick === "CART_ICON" ? (
-                  ((<Redirect to="/cart" />))
+                  ((<Redirect to="/cart" />), (<CART />))
                 ) : this.props.cartClick === "PRODUCT_PAGE" ? (
                   ((
                     <Redirect
                       to={"/" + this.props.tabName + this.props.productId}
                     />
-                  )
-                  )
+                  ),
+                  (<PDP client={this.props.client} />))
                 ) : (
                   <CATEGORY client={this.props.client} />
                 );

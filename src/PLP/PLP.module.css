@@ -19,7 +19,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  column-gap: 7%;
+  column-gap: 6%;
   margin-top: 6em;
   width: 1260px;
 }
@@ -48,8 +48,8 @@ margin-bottom: 7%;
 .ListWraper img {
   padding: 10px;
   text-align: center;
-  width: 354px;
-  height: 330px;
+  width: 369px;
+  height: 346px;
   object-fit: cover;
   object-position: top;
 }
@@ -57,8 +57,8 @@ margin-bottom: 7%;
   position: absolute;
   top: 0;
   left: 0;
-  height: 330px;
-  width: 354px;
+  width: 369px;
+  height: 346px;
   background: #ffffff;
   opacity: 0.5;
   display: flex;
@@ -81,7 +81,7 @@ margin-bottom: 7%;
   position: absolute;
   height: 52px;
   width: 52px;
-  left: 280px;
+  left: 290px;
   top: 304px;
   border: none;
   background-color: #5ece7b;
@@ -94,7 +94,7 @@ margin-bottom: 7%;
   height: 30px;
   width: 30px;
   position: absolute;
-  left: 295px;
+  left: 305px;
   top: 319px;
   background: url('../assets/icons/EmptyCartWhite.svg')no-repeat;
 }
@@ -102,6 +102,7 @@ margin-bottom: 7%;
 .ItemInfo {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
 }
 .ItemInfo .Brand {
   font-family: Raleway;
