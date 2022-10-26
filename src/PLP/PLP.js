@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { gql } from "@apollo/client";
-
 import styles from "./PLP.module.css";
-import { withRouter } from "react-router-dom";
+import withRouter from "../HOC/WithRouter";
 import { connect } from "react-redux";
 
 const CATREGORY_QUERY = gql`
@@ -39,7 +38,7 @@ const CATREGORY_QUERY = gql`
   }
 `;
 
-class Category extends Component {
+class Plp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,8 +60,7 @@ class Category extends Component {
     let { category } = data;
     this.props.currentTabName(category.name);
     this.setState({ categoryData: category });
-    let history = this.props.history;
-    history.push("/" + this.props.tabName);
+    // this.props.params(this.props.tabName)
   }
 
   async componentDidUpdate() {
@@ -79,8 +77,9 @@ class Category extends Component {
       });
       let { category } = data;
       this.setState({ categoryData: category });
-      let history = this.props.history;
-      history.push("/" + this.props.tabName);
+      // this.props.params(this.props.tabName)
+
+
     }
   }
   
@@ -88,13 +87,14 @@ class Category extends Component {
     this.setState({ mouseEnter: true });
     this.props.currentProductId(id);
     this.props.currentCartClick("PRODUCT_PAGE");
-    let history = this.props.history;
-    history.push("/" + this.props.tabName + "/" + id);
+    this.props.navigate("/" + this.props.tabName + "/" + id)
+    this.props.params("/" + this.props.tabName + "/" + id)
+
   }
   handleIconClick() {
     this.props.currentCartClick("CART_ICON");
-    let history = this.props.history;
-    history.push("/cart");
+    this.props.location.pathName ="/cart"
+
     this.setState({ mouseEnter: false });
   }
 
@@ -202,4 +202,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(Category));
+)(withRouter(Plp));

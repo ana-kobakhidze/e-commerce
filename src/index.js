@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./REDUCER/rootReducer";
+
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 
 import "./index.css";

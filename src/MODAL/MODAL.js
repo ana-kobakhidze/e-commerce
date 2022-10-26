@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import withRouter from "../HOC/WithRouter";
 import styles from "./MODAL.module.css";
 import getSymbolFromCurrency from "currency-symbol-map";
 
@@ -25,12 +25,7 @@ class Modal extends Component {
     this.setState({ orderData: this.props.orderData });
   }
   componentDidUpdate() {
-    const { redirect } = this.state;
-    if (redirect) {
-      this.closeModal();
-      this.props.currentCartClick("ADD_TO_CART");
-      return <Redirect push to="/cart" />;
-    }
+   this.state.redirect && this.redirectButtonHandler();
   }
 
   saveOrder = (updatedOrderData) => {
@@ -128,6 +123,9 @@ class Modal extends Component {
 
   redirectButtonHandler = () => {
     this.setState({ redirect: true });
+      this.closeModal();
+      // this.props.currentCartClick("ADD_TO_CART");
+      this.props.navigate("/cart")
   };
 
   render() {
@@ -358,4 +356,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Modal));

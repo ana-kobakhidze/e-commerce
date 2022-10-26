@@ -20,7 +20,6 @@ function rootReducer(state = initialState, action) {
       return { ...state, currencyDisable: action.disable}
     }
     case ACTION_TYPES.CLOSE_DROPDOWN: {
-
       return { ...state, toggleDropDown: action.toggle }
     }
     case ACTION_TYPES.SHOW_MODAL: {

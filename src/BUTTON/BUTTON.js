@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import withRouter from "../HOC/WithRouter";
 import { connect } from "react-redux";
 
 class Button extends Component {
@@ -22,14 +22,12 @@ class Button extends Component {
     this.props.saveOrderData(storedOrder);
     localStorage.setItem("order", JSON.stringify(storedOrder));
     this.setState({ redirect: true });
-    this.props.currentCartClick("ADD_TO_CART");
-    let history = this.props.history;
-    history.push("/cart");
+    // this.props.currentCartClick("ADD_TO_CART");
   };
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to="/cart" />;
+      return  <Navigate to="/cart" replace={true} />;
     }
     return (
       <button

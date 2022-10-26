@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { gql } from "@apollo/client";
-import { withRouter } from "react-router-dom";
+import withRouter from "../HOC/WithRouter";
 import { connect } from "react-redux";
-import getSymbolFromCurrency from "currency-symbol-map";
+
 
 import styles from "./PDP.module.css";
 import Button from "../BUTTON/BUTTON";

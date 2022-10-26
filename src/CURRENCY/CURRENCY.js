@@ -3,7 +3,6 @@ import { gql } from "@apollo/client";
 import { connect } from "react-redux";
 
 import styles from "./CURRENCY.module.css";
-import getSymbolFromCurrency from "currency-symbol-map";
 
 const DATA_QUERY = gql`
   query {
