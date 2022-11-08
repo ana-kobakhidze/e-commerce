@@ -1,3 +1,5 @@
+
+
 import React, { Component } from "react";
 import { gql } from "@apollo/client";
 import withRouter from "../HOC/WithRouter";
@@ -58,7 +60,20 @@ class PDP extends Component {
       PRODUCT_QUERY
     );
     this.setState({ product: product });
+    this.props.saveProductData(product);
   }
+  // async componentDidUpdate() {
+  //   if (this.props.product === null){
+  //   const { client } = this.props;
+  //   const product = await fetchExtendedProductAsync(
+  //     client,
+  //     this.props.productId,
+  //     PRODUCT_QUERY
+  //   );
+  //   this.setState({ product: product });
+  //   this.props.saveProductData(product);
+  // }
+  // }
 
   handleImageHover = (e) => {
     this.setState({ hoverImage: e });
@@ -66,7 +81,7 @@ class PDP extends Component {
   };
 
   attributeHandler = (parentId, attributeId) => {
-    const { product } = this.state;
+    let product = this.props.product
     const attributeParent = product.attributes.find(
       (parent) => parent.id === parentId
     );
@@ -79,7 +94,8 @@ class PDP extends Component {
   };
 
   render() {
-    const { product, imageClicked, hoverImage } = this.state;
+    const { imageClicked, hoverImage } = this.state;
+    let product = this.props.product
     let description;
     const imageList = [];
     const mainImage = [];
@@ -221,7 +237,15 @@ const mapStateToProps = (state) => {
   return {
     currency: state.currency,
     productId: state.productId,
+    product: state.product
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveProductData: (product) => {
+      dispatch({ type: "SAVE_PRODUCT_DATA", data: product });
+    },
   };
 };
 
-export default connect(mapStateToProps)(withRouter(PDP));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(PDP));

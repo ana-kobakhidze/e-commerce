@@ -77,24 +77,20 @@ class Plp extends Component {
       });
       let { category } = data;
       this.setState({ categoryData: category });
-      // this.props.params(this.props.tabName)
-
-
     }
   }
   
   handleClick(id) {
     this.setState({ mouseEnter: true });
+    localStorage.setItem("productId", JSON.stringify(id));
     this.props.currentProductId(id);
     this.props.currentCartClick("PRODUCT_PAGE");
     this.props.navigate("/" + this.props.tabName + "/" + id)
-    this.props.params("/" + this.props.tabName + "/" + id)
 
   }
   handleIconClick() {
     this.props.currentCartClick("CART_ICON");
     this.props.location.pathName ="/cart"
-
     this.setState({ mouseEnter: false });
   }
 

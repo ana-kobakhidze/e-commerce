@@ -21,8 +21,8 @@ class Button extends Component {
     }
     this.props.saveOrderData(storedOrder);
     localStorage.setItem("order", JSON.stringify(storedOrder));
+    console.log(storedOrder)
     this.setState({ redirect: true });
-    // this.props.currentCartClick("ADD_TO_CART");
   };
 
   render() {

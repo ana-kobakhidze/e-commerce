@@ -69,7 +69,7 @@ class Currency extends Component {
 
     return (
       <div className={styles.CurrenyWrapper}>
-      <div className={toggleDropDown && styles.Modal} onClick={this.closeClickHandler}></div>
+      <div className={toggleDropDown ? styles.Modal : ''} onClick={this.closeClickHandler}></div>
         <p className={styles.Currency} onClick={this.arrowClickHandler}>
           {this.props.currency}
         </p>

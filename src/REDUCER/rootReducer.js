@@ -1,5 +1,13 @@
 import { ACTION_TYPES } from "../Constants";
 
+// const productItem = () =>{
+//   const serialState = localStorage.getItem('productItem');
+//   if (serialState === null) {
+//     return undefined;
+//   }
+//   return JSON.parse(serialState);
+// }  
+
 const initialState = {
   currency: "$",
   currencyDisable: false,
@@ -8,7 +16,8 @@ const initialState = {
   orderData: JSON.parse(localStorage.getItem("order")) || [],
   tabName: "",
   cartClick: "",
-  productId: ''
+  productId: JSON.parse(localStorage.getItem("productId")) || [],
+  product: JSON.parse(localStorage.getItem("productItem")) || []
 };
 
 function rootReducer(state = initialState, action) {
@@ -39,6 +48,9 @@ function rootReducer(state = initialState, action) {
     }
     case ACTION_TYPES.SAVE_CARTICON_CLICK: {
       return { ...state, cartClick: action.clicked}
+    }
+    case ACTION_TYPES.SAVE_PRODUCT_DATA: {
+      return { ...state, product: action.data}
     }
     default:
       return state;
