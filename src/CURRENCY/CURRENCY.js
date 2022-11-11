@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { gql } from "@apollo/client";
 import { connect } from "react-redux";
 
-import styles from "./CURRENCY.module.css";
+import styles from "./Currency.module.css";
 
 const DATA_QUERY = gql`
   query {
@@ -34,6 +34,10 @@ class Currency extends Component {
   }
 
   arrowClickHandler() {
+    if(this.props.showModal){
+      this.props.changeModalState(false);
+      document.body.style.overflow = 'auto';
+    }
     if (!this.props.currencyDisable) {
       const { toggleDropDown } = this.props;
       this.props.toggleDropDownButton(!toggleDropDown);
@@ -102,6 +106,7 @@ const mapDispatchToProps = (dispatch) => {
     toggleDropDownButton: (event) => {
       dispatch({ type: "CLOSE_DROPDOWN", toggle: event });
     },
+    changeModalState: (bool) => dispatch({type: "SHOW_MODAL", show: bool})
   };
 };
 

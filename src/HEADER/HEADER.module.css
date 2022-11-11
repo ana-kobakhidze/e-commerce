@@ -34,18 +34,17 @@
 }
 
 
-/* .ProductCounter {
+.ProductCounter {
   width: 20px;
   height: 20px;
   border-radius: 60px;
   background-color: black;
   position: absolute;
-  top: 4px;
-  left: 176px;
+  top: 28px;
   cursor: pointer;
-} */
-/* .NumberOfCounter {
-  position: absolute;
+} 
+ .NumberOfCounter {
+  position: relative;
   left: 6px;
   top: -11px;
   font-family: Roboto;
@@ -57,7 +56,7 @@
   text-align: center;
   text-transform: uppercase;
   color: white;
-} */
+}
 /* .NumberOfCounterPosition {
   position: absolute;
   left: 2px;

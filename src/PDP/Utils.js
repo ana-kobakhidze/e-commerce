@@ -18,7 +18,7 @@ const fetchProductFromServerAsync = async (client, productId, query) => {
     query: query,
     variables: { id: productId },
   });
-  //TODO: maybe some exception handling?
+
   const { product } = data;
   return product;
 };

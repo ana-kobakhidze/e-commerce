@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import { gql } from "@apollo/client";
 import withRouter from "../HOC/WithRouter";
@@ -7,7 +5,7 @@ import { connect } from "react-redux";
 
 
 import styles from "./PDP.module.css";
-import Button from "../BUTTON/BUTTON";
+import Button from "../button/button";
 import { fetchExtendedProductAsync } from "./Utils";
 
 const PRODUCT_QUERY = gql`
@@ -45,7 +43,7 @@ class PDP extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: undefined,
+      product: null,
       hoverImage: "",
       imageClicked: false,
       attributeIsSelected: false,
@@ -60,20 +58,9 @@ class PDP extends Component {
       PRODUCT_QUERY
     );
     this.setState({ product: product });
+    localStorage.setItem("productItem", JSON.stringify(product));
     this.props.saveProductData(product);
   }
-  // async componentDidUpdate() {
-  //   if (this.props.product === null){
-  //   const { client } = this.props;
-  //   const product = await fetchExtendedProductAsync(
-  //     client,
-  //     this.props.productId,
-  //     PRODUCT_QUERY
-  //   );
-  //   this.setState({ product: product });
-  //   this.props.saveProductData(product);
-  // }
-  // }
 
   handleImageHover = (e) => {
     this.setState({ hoverImage: e });
@@ -95,7 +82,7 @@ class PDP extends Component {
 
   render() {
     const { imageClicked, hoverImage } = this.state;
-    let product = this.props.product
+    let product = this.props.product;
     let description;
     const imageList = [];
     const mainImage = [];

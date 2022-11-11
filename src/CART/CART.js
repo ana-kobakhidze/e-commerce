@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import withRouter from "../HOC/WithRouter";
 
-import styles from "./CART.module.css";
-import getSymbolFromCurrency from "currency-symbol-map";
+import styles from "./Cart.module.css";
 
 //TODO: Think about merging it with Modal.js
 class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      orderData: [],
+      orderData: null,
+      count: undefined
     };
 
     this.attributeSelectionHandler = this.attributeSelectionHandler.bind(this);
@@ -26,7 +27,11 @@ class Cart extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.setState({ orderData: this.props.orderData });
+      if(this.state.orderData.length <= 0){
+        this.props.navigate("/" + this.props.tabName)
+      }
     }
+
   }
 
   saveOrder = (updatedOrderData) => {
@@ -61,25 +66,37 @@ class Cart extends Component {
   incrementHandler = (id) => {
     const { orderData } = this.state;
     const updatedOrderData = orderData.map((product) => {
-      if (product.id === id) {
-        return { ...product, count: product.count + 1 };
+      if (product.id === id ) {
+        return { ...product, count: product.count + 1 }
       } else {
         return { ...product };
       }
     });
     this.saveOrder(updatedOrderData);
+
   };
 
   decrementHandler = (id) => {
     const { orderData } = this.state;
-    const updatedOrderData = orderData.map((product) => {
+    const updateOrderData = orderData.map((product, index) => {
       if (product.id === id && product.count > 1) {
-        return { ...product, count: product.count - 1 };
-      } else {
-        return { ...product };
+        return  { ...product, count: product.count - 1 };
+      }else if(product.id === id && product.count === 1){
+        return  { ...product, count: 0 };
+      }
+      else{
+        return {...product}
       }
     });
-    this.saveOrder(updatedOrderData);
+    this.saveOrder(updateOrderData) 
+
+    orderData.forEach( product => {
+      if (product.id === id && product.count === 1){
+        this.setState({count:1})
+        this.deleteButtonHandler(id)
+      } 
+    })
+
   };
 
   getProductFromState = (id) => {
@@ -112,39 +129,34 @@ class Cart extends Component {
     });
     this.saveOrder(updatedOrderData);
   };
+
   deleteButtonHandler = (id) => {
     const { orderData } = this.state;
     const newArr = orderData.filter((item) => item.id !== id);
-    this.saveOrder(newArr);
+    this.saveOrder(newArr)
   };
 
   render() {
     let itemList = [];
-    const { orderData } = this.state;
+    const { orderData } = this.props;
+
 
     if (orderData) {
       orderData.forEach((product, index) => {
         itemList.push(
           <div key={index}>
+            <div className={styles.Product}>
+            <hr />
             <div className={styles.ItemListWraper}>
-              <hr />
+            <div className={styles.LeftRow}>
+
               <p className={styles.BrandName}>{product.brand}</p>
               <p className={styles.ItemName}>{product.name}</p>
 
               <p className={styles.ItemPrice}>
                 {product.prices.map((price) => {
                   let currentPriceCurrency;
-                  if (
-                    price.currency === "AUD" &&
-                    "A" + getSymbolFromCurrency(price.currency) ===
-                      this.props.currency
-                  ) {
-                    currentPriceCurrency = this.props.currency + price.amount;
-                  } else if (
-                    price.currency !== "AUD" &&
-                    getSymbolFromCurrency(price.currency) ===
-                      this.props.currency
-                  ) {
+                  if (price.currency.symbol === this.props.currency) {
                     currentPriceCurrency = this.props.currency + price.amount;
                   }
                   return currentPriceCurrency;
@@ -203,129 +215,63 @@ class Cart extends Component {
                       <p className={styles.AttributesName}>
                         {attribute.name.toUpperCase() + ":"}
                       </p>
+                      <div className={styles.AttributesBoxWraper}>
                       {renderableItems}
+                      </div>
                     </div>
                   );
                   return attributeRenderableItems;
                 })}
-
-              <button
-                className={styles.PlusBox}
+                </div>
+                <div className={styles.MiddleRow}>
+                <div
+                className={styles.Increment}
                 onClick={() => this.incrementHandler(product.id)}
-              ></button>
+              ></div>
 
-              <svg
-                className={styles.Vertical}
-                width="1"
-                height="17"
-                viewBox="0 0 1 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0.5 1V16"
-                  stroke="#1D1F22"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <svg
-                className={styles.Horizontal}
-                width="17"
-                height="1"
-                viewBox="0 0 17 1"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 0.5H16"
-                  stroke="#1D1F22"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
               <p className={styles.Count}>{product.count}</p>
-              <button
-                className={styles.MinusBox}
-                onClick={() => this.decrementHandler(product.id)}
-              ></button>
-              <svg
-                className={styles.HorizontalMinus}
-                width="17"
-                height="1"
-                viewBox="0 0 17 1"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 0.5H16"
-                  stroke="#1D1F22"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
 
+              <div
+                className={styles.Substract}
+                onClick={() => this.decrementHandler(product.id)}
+              ></div>
+              </div>
+              <div className={styles.RightRow}>
               <img
                 className={styles.ProductImage}
                 src={product.gallery[product.currentPosition]}
                 alt="product"
               />
-
+              <div className={styles.ArrowWrapper}>
               {product.gallery.length > 1 && (
-                <svg
-                  onClick={() => this.leftSliderHandler(product.id)}
-                  className={styles.LeftArrow}
-                  width="8"
-                  height="14"
-                  viewBox="0 0 8 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7 13L1 7L7 1"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <div className={styles.LeftArrow} onClick={() => this.leftSliderHandler(product.id)}></div>
               )}
 
               {product.gallery.length > 1 && (
-                <svg
-                  className={styles.RightArrow}
-                  onClick={() => this.rightSliderHandler(product.id)}
-                  width="8"
-                  height="14"
-                  viewBox="0 0 8 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1 13L7 7L1 1"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <div className={styles.RightArrow} onClick={() => this.rightSliderHandler(product.id)}></div>
               )}
+              </div>
+              </div>
+              </div>
             </div>
-            <button
-              className={styles.DeleteButton}
-              onClick={() => this.deleteButtonHandler(product.id)}
-            >
-              X
-            </button>
+
           </div>
         );
       });
     }
 
     return (
-      <div>
-        <h1 className={styles.CartTitle}>CART</h1>
-        {itemList}
+      <div className={styles.CartWrapper}>
+
+        <div className={styles.CartHeader}>
+          <h1 className={styles.CartTitle}>CART</h1>
+        </div>
+      <div className={styles.CartContent}>
+        {this.props.orderData ? itemList : null}
+      </div>
+      <div className={styles.CartFooter}>
+
+      </div>
       </div>
     );
   }
@@ -334,6 +280,8 @@ const mapStateToProps = (state) => {
   return {
     currency: state.currency,
     orderData: state.orderData,
+    tabName: state.tabName
+
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -341,6 +289,7 @@ const mapDispatchToProps = (dispatch) => {
     saveOrderData: (order) => {
       dispatch({ type: "SAVE_ORDER_DATA", data: order });
     },
+
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Cart));

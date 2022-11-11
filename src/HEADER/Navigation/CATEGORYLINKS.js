@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { gql } from "@apollo/client";
-import styles from "./CATEGORYLINKS.module.css";
+import styles from "./CategoryLinks.module.css";
 
 const DATA_QUERY = gql`
   query {
@@ -28,9 +28,13 @@ class CategoryLinks extends Component {
   }
 
   tabClickHandler = (index, name) => {
+    if(this.props.showModal){
+      this.props.changeModalState(false);
+      document.body.style.overflow = 'auto';
+    }
     this.setState({ clickedTab: index });
     this.props.currentTabName(name);
-    this.props.currentCartClick("TAB_IS_CLICKED");
+
   };
   render() {
     const { categoryNames, clickedTab } = this.state;
@@ -65,6 +69,7 @@ class CategoryLinks extends Component {
 const mapStateToProps = (state) => {
   return {
     tabName: state.tabName,
+    showModal: state.showModal
   };
 };
 
@@ -73,6 +78,7 @@ const mapDispatchToProps = (dispatch) => {
     currentTabName: (name) => dispatch({ type: "SAVE_TABNAME", tabName: name }),
     currentCartClick: (event) =>
       dispatch({ type: "SAVE_CARTICON_CLICK", clicked: event }),
+    changeModalState: (bool) => dispatch({type: "SHOW_MODAL", show: bool})
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryLinks);

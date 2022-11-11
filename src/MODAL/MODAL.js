@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import withRouter from "../HOC/WithRouter";
-import styles from "./MODAL.module.css";
-import getSymbolFromCurrency from "currency-symbol-map";
+import styles from "./Modal.module.css";
 
 //TODO: Merge with Cart.js as they have the same body except maybe render
 class Modal extends Component {
@@ -25,7 +24,7 @@ class Modal extends Component {
     this.setState({ orderData: this.props.orderData });
   }
   componentDidUpdate() {
-   this.state.redirect && this.redirectButtonHandler();
+    this.state.redirect && this.redirectButtonHandler();
   }
 
   saveOrder = (updatedOrderData) => {
@@ -36,7 +35,6 @@ class Modal extends Component {
 
   attributeSelectionHandler = (productId, attributeId, itemId) => {
     const { orderData } = this.state;
-    //find attribute in object tree, go back and update each node
     const updatedOrderData = orderData.map((product) => {
       if (product.id === productId) {
         const updatedAttributes = product.attributes.map((attribute) => {
@@ -116,16 +114,20 @@ class Modal extends Component {
     this.saveOrder(updatedOrderData);
   };
 
-  closeModal = () => {
-    this.props.displayModal(false);
-    this.props.disableCurrencyButton(false);
+  closeModal = (event) => {
+    let modal = document.getElementsByClassName("Modal_Modal__k5zJr")[0];
+    let frame = document.getElementsByClassName("Modal_BtnCheckOut__W1yZQ")[0];
+    document.body.style.overflow = "auto";
+    if (event.target === modal || event.target === frame) {
+      this.props.displayModal(false);
+      this.props.disableCurrencyButton(false);
+    }
   };
 
   redirectButtonHandler = () => {
     this.setState({ redirect: true });
-      this.closeModal();
-      // this.props.currentCartClick("ADD_TO_CART");
-      this.props.navigate("/cart")
+    this.props.displayModal(false);
+    this.props.navigate("/cart");
   };
 
   render() {
@@ -136,143 +138,95 @@ class Modal extends Component {
       orderData.forEach((product, index) => {
         itemList.push(
           <div className={styles.OrderList} key={index}>
-            <p className={styles.NameOfBrand}>{product.brand}</p>
-            <p className={styles.NameOfProduct}>{product.name}</p>
+            <div className={styles.LeftRow}>
+              <p className={styles.NameOfBrand}>{product.brand}</p>
+              <p className={styles.NameOfProduct}>{product.name}</p>
+              <p className={styles.PriceOfProduct}>
+                {product.prices.map((price) => {
+                  let currentPriceCurrency;
+                  if (price.currency.symbol === this.props.currency) {
+                    currentPriceCurrency = this.props.currency + price.amount;
+                  }
+                  return currentPriceCurrency;
+                })}
+              </p>
 
-            <p className={styles.PriceOfProduct}>
-              {product.prices.map((price) => {
-                let currentPriceCurrency;
-                if (
-                  price.currency === "AUD" &&
-                  "A" + getSymbolFromCurrency(price.currency) ===
-                    this.props.currency
-                ) {
-                  currentPriceCurrency = this.props.currency + price.amount;
-                } else if (
-                  price.currency !== "AUD" &&
-                  getSymbolFromCurrency(price.currency) === this.props.currency
-                ) {
-                  currentPriceCurrency = this.props.currency + price.amount;
-                }
-                return currentPriceCurrency;
-              })}
-            </p>
-
-            {product.attributes &&
-              product.attributes.map((attribute) => {
-                let attributeRenderableItems = [];
-                const renderableItems = attribute.items.map((item, index) => {
-                  return item.isSelected ? (
-                    <button
-                      key={index}
-                      className={
-                        item.value[0] !== "#"
-                          ? styles.SelectedAttributeButton
-                          : styles.ColorAttributeBox
-                      }
-                      onClick={() =>
-                        this.attributeSelectionHandler(
-                          product.id,
-                          attribute.id,
-                          item.id
-                        )
-                      }
-                      style={{ backgroundColor: item.value }}
-                    >
-                      {item.value[0] === "#" ? null : item.value}
-                    </button>
-                  ) : (
-                    <button
-                      key={index}
-                      className={
-                        item.value[0] === "#"
-                          ? styles.SelectedColorAttributeBox
-                          : styles.attributeButtonBox
-                      }
-                      onClick={() =>
-                        this.attributeSelectionHandler(
-                          product.id,
-                          attribute.id,
-                          item.id
-                        )
-                      }
-                      style={{ backgroundColor: item.value }}
-                    >
-                      {item.value[0] === "#" ? null : item.value}
-                    </button>
+              {product.attributes &&
+                product.attributes.map((attribute) => {
+                  let attributeRenderableItems = [];
+                  const renderableItems = attribute.items.map((item, index) => {
+                    return item.isSelected ? (
+                      <button
+                        key={index}
+                        className={
+                          item.value[0] !== "#"
+                            ? styles.SelectedColorAttributeBox
+                            : styles.ColorAttributeBox
+                        }
+                        onClick={() =>
+                          this.attributeSelectionHandler(
+                            product.id,
+                            attribute.id,
+                            item.id
+                          )
+                        }
+                        style={{ backgroundColor: item.value }}
+                      >
+                        {item.value[0] === "#" ? null : item.value}
+                      </button>
+                    ) : (
+                      <button
+                        key={index}
+                        className={
+                          item.value[0] === "#"
+                            ? styles.SelectedAttributeButton 
+                            : styles.AttributeButtonBox
+                        }
+                        onClick={() =>
+                          this.attributeSelectionHandler(
+                            product.id,
+                            attribute.id,
+                            item.id
+                          )
+                        }
+                        style={{ backgroundColor: item.value }}
+                      >
+                        {item.value[0] === "#" ? null : item.value}
+                      </button>
+                    );
+                  });
+                  attributeRenderableItems.push(
+                    <div className={styles.AttributesWraper} key={index}>
+                      <p className={styles.AttributeName}>
+                        {attribute.name + ":"}
+                      </p>
+                      <div className={styles.AttributesBoxWraper}>
+                        {renderableItems}
+                      </div>
+                    </div>
                   );
-                });
-                attributeRenderableItems.push(
-                  <div className={styles.AttributesWraper} key={index}>
-                    <p className={styles.AttributeName}>
-                      {attribute.name.toUpperCase() + ":"}
-                    </p>
-                    {renderableItems}
-                  </div>
-                );
-                return attributeRenderableItems;
-              })}
+                  return attributeRenderableItems;
+                })}
+            </div>
+            <div className={styles.MiddleRow}>
+              <div
+                className={styles.Increment}
+                onClick={() => this.incrementHandler(product.id)}
+              ></div>
+              <p className={styles.Counter}>{product.count}</p>
+              <div
+                className={styles.Substract}
+                onClick={() => this.decrementHandler(product.id)}
+              ></div>
+            </div>
 
-            <button
-              className={styles.AddButton}
-              onClick={() => this.incrementHandler(product.id)}
-            ></button>
-
-            <svg
-              className={styles.VerticalLine}
-              width="1"
-              height="17"
-              viewBox="0 0 1 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0.5 1V16"
-                stroke="#1D1F22"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            <div className={styles.RightRow}>
+              <img
+                className={styles.ProductGallery}
+                src={product.gallery[product.currentPosition]}
+                alt="product"
               />
-            </svg>
-            <svg
-              className={styles.HorizontalLine}
-              width="17"
-              height="1"
-              viewBox="0 0 17 1"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 0.5H16"
-                stroke="#1D1F22"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <p className={styles.Counter}>{product.count}</p>
-            <button
-              className={styles.SubtrBox}
-              onClick={() => this.decrementHandler(product.id)}
-            ></button>
-            <svg
-              className={styles.SubtrHorizontalLine}
-              width="17"
-              height="1"
-              viewBox="0 0 17 1"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 0.5H16"
-                stroke="#1D1F22"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <img
-              className={styles.ProductGallery}
-              src={product.gallery[product.currentPosition]}
-              alt="product"
-            />
+            </div>
           </div>
         );
       });
@@ -282,15 +236,7 @@ class Modal extends Component {
     if (orderData && orderData.length > 0)
       orderData.forEach((product) => {
         product.prices.map((price) => {
-          if (
-            price.currency === "AUD" &&
-            "A" + getSymbolFromCurrency(price.currency) === this.props.currency
-          ) {
-            priceArray.push(price.amount * product.count);
-          } else if (
-            price.currency !== "AUD" &&
-            getSymbolFromCurrency(price.currency) === this.props.currency
-          ) {
+          if (price.currency.symbol === this.props.currency) {
             priceArray.push(price.amount * product.count);
           }
           return priceArray;
@@ -304,29 +250,42 @@ class Modal extends Component {
     }
 
     return (
-      <div>
-        <div className={styles.ModalWindow}>
-          <h1 className={styles.CartHeadline}>My Bag,</h1>
-          <p className={styles.ItemQuantity}>
-            {this.props.orderQuantity} items
-          </p>
-          {itemList}
-          <p className={styles.Total}>Total:</p>
-          <p className={styles.TotalNumber}>{totalPrice}</p>
-          <button
-            className={styles.BtnForCart}
-            onClick={() => this.redirectButtonHandler()}
-          >
-            VIEW BAG
-          </button>
-          <button
-            className={styles.BtnCheckOut}
-            onClick={() => this.props.displayModal()}
-          >
-            CHECK OUT
-          </button>
+      <div className={styles.Modal} onClick={(event) => this.closeModal(event)}>
+        <div className={styles.ModalContent}>
+          <div
+            className={styles.ModalClose}
+            onClick={(event) => this.closeModal(event)}
+          />
+          <div className={styles.ModalWindow}>
+            <div className={styles.ModalHeader}>
+              <h1 className={styles.CartHeadline}>My Bag,</h1>
+              <p className={styles.ItemQuantity}>
+                {this.props.orderQuantity} items
+              </p>
+            </div>
+            <div className={styles.Content}>{itemList}</div>
+            <div className={styles.ModalFooter}>
+              <div className={styles.TotalPrice}>
+                <p className={styles.Total}>Total:</p>
+                <p className={styles.TotalNumber}>{totalPrice}</p>
+              </div>
+              <div className={styles.ButtonGroup}>
+                <button
+                  className={styles.BtnForCart}
+                  onClick={() => this.redirectButtonHandler()}
+                >
+                  VIEW BAG
+                </button>
+                <button
+                  className={styles.BtnCheckOut}
+                  onClick={() => this.props.displayModal()}
+                >
+                  CHECK OUT
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className={styles.Modal} onClick={() => this.closeModal()} />
       </div>
     );
   }

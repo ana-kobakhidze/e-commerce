@@ -1,19 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300&display=swap");
+.CartWrapper{
+  display: flex;
+  flex-direction: column;
+  margin-top: 53px;
+  padding-left: 22px;
+}
+.CartHeader {
+  margin-bottom: 23px;
+}
+
 
 .CartTitle {
-  position: absolute;
-  width: 84px;
-  height: 40px;
-  left: 100px;
-  top: 160px;
-  font-family: Raleway;
+  font-family: 'Raleway';
   font-style: normal;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 32px;
   line-height: 40px;
   text-transform: uppercase;
-  color: #1d1f22;
+  margin-bottom: 23px;
 }
 
 .Hr {
@@ -27,28 +32,32 @@
 .DeleteButton {
   display: none;
 }
-
-.ItemListWraper {
-  position: relative;
-  left: 102px;
-  top: 240px;
-  width: 1217px;
-  height: 421px;
+.LeftRow{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+.ItemListWraper {
+  display: flex;
+  width: 1240px;
+  justify-content: space-between;
+  margin-top: 21px;
+  margin-bottom: 38px;
+}
+/* .Delete{
+  display:none;
 
-.ItemListWraper:hover + .DeleteButton,
+} */
+.Product:hover > .DeleteButton,
 .DeleteButton:hover {
   cursor: pointer;
-  display: block;
-  position: relative;
-  left: 103px;
-  bottom: 154px;
+  display: flex;
+  justify-content: flex-end;
   width: 20px;
   font-size: 10px;
   height: 20px;
-  text-align: center;
   background-color: black;
-  border: 1px solid #393a42;
+  border: none;
   color: #fff;
   font-weight: 600;
 }
@@ -56,24 +65,16 @@
 .BrandName {
   width: 292px;
   height: 27px;
-  position: absolute;
-  top: 26px;
   font-family: Raleway;
   font-style: normal;
   font-weight: 600;
   font-size: 30px;
   line-height: 27px;
-  display: flex;
-  align-items: center;
   color: #1d1f22;
+  margin: 0 0 20px 0;
 }
 
 .ItemName {
-  position: absolute;
-  width: 400px;
-  height: 27px;
-  left: 0px;
-  top: 67px;
   font-family: Raleway;
   font-style: normal;
   font-weight: normal;
@@ -82,14 +83,10 @@
   display: flex;
   align-items: center;
   color: #1d1f22;
+  margin: 0 0 20px 0;
 }
 
 .ItemPrice {
-  position: absolute;
-  width: 86px;
-  height: 46px;
-  left: 0px;
-  top: 103px;
   font-family: Raleway;
   font-style: normal;
   font-weight: bold;
@@ -98,49 +95,32 @@
   display: flex;
   align-items: center;
   color: #1d1f22;
+  margin: 0 0 20px 0;
 }
 .AttributesName {
-  position: absolute;
-  width: 182px;
-  bottom: 94px;
-  font-family: Roboto Condensed;
+  font-family: 'Roboto Condensed';
   font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 18px;
   line-height: 18px;
   color: #1d1f22;
 }
-.PlusBox {
+.MiddleRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 53%;
+  justify-content: space-between;
+}
+.Increment{
   height: 45px;
   width: 45px;
-  position: absolute;
-  right: 158px;
-  top: 58px;
-  background-color: white;
-  border: 1px solid #1d1f22;
-  box-sizing: border-box;
+  background: url("../assets/icons/plusSquareL.svg") no-repeat;
   cursor: pointer;
 }
-.Vertical {
-  position: absolute;
-  right: 180px;
-  top: 71px;
-  border: 1px solid #1d1f22;
-  stroke-linecap: round;
-}
 
-.Horizontal {
-  position: absolute;
-  left: 1027px;
-  top: 78px;
-  border: 1px solid #1d1f22;
-  stroke-linecap: round;
-}
 
 .Count {
-  position: absolute;
-  left: 1029px;
-  top: 106px;
   font-family: Raleway;
   font-style: normal;
   font-weight: 500;
@@ -148,63 +128,58 @@
   line-height: 160%;
   color: #1d1f22;
 }
-
-.MinusBox {
+.Substract{
   height: 45px;
   width: 45px;
-  border-radius: 0px;
-  position: absolute;
-  left: 1015px;
-  top: 199px;
-  background-color: white;
-  border: 1px solid #1d1f22;
-  box-sizing: border-box;
+  background: url("../assets/icons/minusSquareL.svg") no-repeat;
   cursor: pointer;
 }
-
-.HorizontalMinus {
-  position: absolute;
-  left: 1029px;
-  top: 221px;
-  border: 1px solid #1d1f22;
+.RightRow{
+  width: 200px;
+  height: 288px;
 }
 .ProductImage {
-  height: 185px;
-  width: 141px;
-  position: absolute;
-  left: 1075px;
-  top: 58px;
-  object-fit: cover;
-  object-position: 70% 100%;
-}
+  height: 288px;
+  width: 200px;
+  object-fit: contain;
 
-.LeftArrow {
   position: absolute;
-  left: 1088px;
-  top: 143px;
+  z-index: 0;
+}
+.ArrowWrapper{
+  display: flex;
+  position: relative;
+  top: 248px;
+  right: 28px;
+  z-index: 1;
+  justify-content: flex-end;
+}
+.LeftArrow {
+  background:url('../assets/icons/leftArrow.svg') no-repeat;
+  width:24px;
+  height:24px;
   cursor: pointer;
+  margin-right:10px;
 }
 
 .RightArrow {
-  position: absolute;
-  left: 1197px;
-  top: 143px;
+  background:url('../assets/icons/rightArrow.svg') no-repeat;
+  width:24px;
+  height:24px;
   cursor: pointer;
 }
 
 .CategoryAttributesWraper {
   display: flex;
-  flex-direction: row;
-  height: 83px;
-  position: relative;
-  top: 213px;
+  flex-direction: column;
+
+}
+.AttributesBoxWraper{
+  display: flex;
   justify-content: flex-start;
 }
-
 .SelectedAttrBox {
-  margin-right: 30px;
-  position: relative;
-  bottom: 20px;
+  margin-right: 10px;
   width: 63px;
   height: 45px;
   border: 1px solid #808080;
@@ -218,19 +193,16 @@
   pointer-events: none;
 }
 .colorAttrBox {
-  margin-right: 30px;
+  margin-right: 10px;
   width: 63px;
   height: 45px;
-  position: relative;
-  bottom: 20px;
   background-color: white;
   color: #a6a6a6;
   border: 2px solid #1d1f22;
 }
 
 .ColorAttrBoxSelected {
-  margin-right: 30px;
-  position: relative;
+  margin-right: 10px;
   bottom: 20px;
   width: 63px;
   height: 45px;
@@ -239,9 +211,7 @@
   border: 1px solid #1d1f22;
 }
 .attributeBoxOrg {
-  margin-right: 30px;
-  position: relative;
-  bottom: 20px;
+  margin-right: 10px;
   width: 63px;
   height: 45px;
   background-color: white;

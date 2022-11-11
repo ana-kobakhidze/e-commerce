@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import styles from "./HEADER.module.css";
-import CategoryLinks from "./Navigation/CATEGORYLINKS";
-import Currency from "../CURRENCY/CURRENCY";
-import Modal from "../MODAL/MODAL";
+import styles from "./Header.module.css";
+import CategoryLinks from "./Navigation/CategoryLinks";
+import Currency from "../Currency/Currency";
+import Modal from "../Modal/Modal";
 
 class Header extends Component {
   constructor(props) {
@@ -46,7 +46,8 @@ class Header extends Component {
   render() {
     const { orderData } = this.state;
     const { client } = this.props;
-
+    if(this.props.showModal) {
+      document.body.style.overflow = 'hidden'};
     let productQuantityInOrder = [];
     if (orderData) {
       orderData.map((product) => {
@@ -65,9 +66,7 @@ class Header extends Component {
       <header className={styles.Header}>
       {this.props.showModal && <Modal orderQuantity={orderQuantity} />}
         <CategoryLinks client={this.props.client} />
-        <div className={styles.BrandIcon}>
-          
-        </div>
+        <div className={styles.BrandIcon}></div>
 
         <div className={styles.Actions}>
           <Currency client={client} />
@@ -82,7 +81,7 @@ class Header extends Component {
               {orderQuantity.length === 1 ? (
                 <p className={styles.NumberOfCounter}>{orderQuantity}</p>
               ) : (
-                <p className={styles.NumberOfCounterPosition}>
+                <p className={styles.NumberOfCounter}>
                   {orderQuantity}
                 </p>
               )}

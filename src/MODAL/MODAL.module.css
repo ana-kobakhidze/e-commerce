@@ -1,32 +1,47 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300&display=swap");
 .Modal {
-  position: absolute;
-  display:none;
-  width: 1686px;
-  height: 300vh;
-  left: -138px;
-  top: 78px;
-  background: rgba(57, 55, 72, 0.22);
-  z-index: 100;
-  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 92px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
+.ModalContent {
+  background-color: #fefefe;
+  padding: 13px;
+  width: 17%;
+  margin-right: 16%;
+  max-height: 677px;
 
-.ModalWindow {
-  position: absolute;
-  width: 325px;
-  left: 1005px;
-  background: #ffffff;
-  z-index: 101;
-  top: 77px;
 }
+.ModalWindow{
+  display: flex;
+  flex-direction: column;
+}
+.Content{
+  overflow: scroll;
+  max-height: 500px;
+}
+.OrderList {
+  display: flex;
+  margin-top: 13%;
+  justify-content: space-between;
 
+}
+.LeftRow {
+  max-width: 136px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .CartHeadline {
-  position: absolute;
-  width: 118px;
-  height: 26px;
-  left: 16px;
-  top: -2px;
   font-family: Raleway;
   font-style: normal;
   font-weight: bold;
@@ -34,121 +49,94 @@
   line-height: 160%;
   text-align: left;
   color: #1d1f22;
+  display: inline;
 }
 .ItemQuantity {
-  position: absolute;
-  width: 118px;
-  height: 26px;
-  left: 81px;
-  top: -8px;
   font-family: Raleway;
   font-style: normal;
   font-size: 16px;
   line-height: 160%;
   text-align: left;
   color: #1d1f22;
-}
-.OrderList {
-  position: relative;
-  left: 16px;
-  top: 40px;
-  margin-bottom: 60px;
+  display: inline;
+  padding-left: 10px;
 }
 
-.NameOfBrand {
-  position: sticky;
-  height: 52px;
-  left: 57px;
-  width: 200px;
+.NameOfBrand,
+.NameOfProduct {
   font-family: Raleway;
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 160%;
-  display: flex;
-  align-items: center;
   color: #1d1f22;
+  margin: 0;
 }
-.NameOfProduct {
-  position: absolute;
-  width: 113px;
-  top: 26px;
-  font-family: Raleway;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  color: #1d1f22;
-}
+
 .PriceOfProduct {
-  position: absolute;
-  width: 52px;
-  top: 63px;
   font-family: Raleway;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 160%;
-  text-align: right;
   color: #1d1f22;
+  margin: 0;
+}
+.MiddleRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 .AttributesWraper {
   display: flex;
-  flex-direction: row;
-  height: 49px;
-  position: relative;
-  top: 67px;
-  justify-content: flex-start;
-}
-.AttributeName {
-  position: absolute;
-  width: 204px;
-  top: -32px;
-  font-family: Roboto Condensed;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
+  flex-direction: column;
+  width: 82%;
 }
 
+.AttributeName {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+.AttributesBoxWraper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+.ColorAttributeBox {
+  width: 16px;
+  height: 16px;
+  color: #a6a6a6;
+  border: 2px solid #1d1f22;
+  margin-right: 10px;
+}
+.SelectedColorAttributeBox {
+  height: 16px;
+  width: 16px;
+
+  background-color: white;
+  color: #a6a6a6;
+  border: 1px solid #1d1f22;
+  margin-right: 10px;
+}
+/* border: 1px solid #5ECE7B; */
 .SelectedAttributeButton {
-  margin-right: 9px;
-  margin-bottom: 9px;
-  position: relative;
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: normal;
   height: 24px;
   font-size: 12px;
-  color: #1d1f22;
+  color: white;
+  background-color: #1d1f22;
   border: 1px solid #808080;
   pointer-events: none;
+  margin-right: 10px;
 }
-.ColorAttributeBox {
-  margin-right: 9px;
-  margin-bottom: 9px;
-  position: relative;
-  width: 24px;
-  height: 24px;
-  font-size: 12px;
-  background-color: white;
-  color: #a6a6a6;
-  border: 2px solid #1d1f22;
-}
-.SelectedColorAttributeBox {
-  margin-right: 9px;
-  margin-bottom: 9px;
-  height: 24px;
-  width: 24px;
-  font-size: 12px;
-  background-color: white;
-  color: #a6a6a6;
-  border: 1px solid #1d1f22;
-}
-
-.attributeButtonBox {
-  margin-right: 9px;
-  margin-bottom: 9px;
+.AttributeButtonBox {
   height: 24px;
   position: relative;
   font-family: "Source Sans Pro";
@@ -158,6 +146,7 @@
   background-color: white;
   color: #1d1f22;
   border: 0.5px solid #1d1f22;
+  margin-right: 10px;
 }
 .attributeButtonBox:hover {
   background-color: black;
@@ -165,38 +154,15 @@
   cursor: pointer;
 }
 
-.AddButton {
-  height: 24px;
+.Increment {
   width: 24px;
-  position: absolute;
-  left: 154px;
-  top: 22px;
-  background-color: white;
-  border: 1px solid #1d1f22;
-  box-sizing: border-box;
+  height: 24px;
+  background: url("../assets/icons/plusSquare.svg") no-repeat;
   cursor: pointer;
 }
-.VerticalLine {
-  height: 8px;
-  position: absolute;
-  left: 165px;
-  top: 30px;
-  border: 1px solid #1d1f22;
-  border-radius: 1px;
-}
-.HorizontalLine {
-  width: 8px;
-  position: absolute;
-  left: 162px;
-  top: 33px;
-  border: 1px solid #1d1f22;
-  border-radius: 1px;
-}
+
 .Counter {
-  position: absolute;
   font-size: 16px;
-  left: 161px;
-  top: 59px;
   font-family: Raleway;
   font-style: normal;
   font-weight: 500;
@@ -204,72 +170,55 @@
   line-height: 160%;
   color: #1d1f22;
 }
-.SubtrBox {
-  height: 24px;
+
+.Substract {
   width: 24px;
-  border-radius: 0px;
-  position: absolute;
-  left: 156px;
-  top: 135px;
-  background-color: white;
-  border: 1px solid #1d1f22;
-  box-sizing: border-box;
+  height: 24px;
+  background: url("../assets/icons/minusSquare.svg") no-repeat;
   cursor: pointer;
 }
-.SubtrHorizontalLine {
-  width: 8px;
-  position: absolute;
-  left: 164px;
-  top: 146px;
-  border: 1px solid #1d1f22;
-  border-radius: 1px;
-}
 .ProductGallery {
-  height: 137px;
-  width: 105px;
-  position: absolute;
-  left: 188px;
-  top: 22px;
+  height: 190px;
+  width: 121px;
   object-fit: cover;
   object-position: 70% 100%;
 }
-
-.Total {
-  position: relative;
-  height: 37px;
-  left: 16px;
-  top: 67px;
-  font-family: Roboto;
+.ModalFooter{
+  display:flex;
+  flex-direction: column;
+}
+.TotalPrice{
+  display:flex;
+  justify-content: space-between;
+}
+.Total, .TotalNumber{
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 18px;
   color: #1d1f22;
 }
-.TotalNumber {
-  position: relative;
-  right: 16px;
-  top: 12px;
-  text-align: right;
+.TotalNumber{
+  font-weight: 700;
+}
+.ButtonGroup{
+  display:flex;
+  justify-content: space-between;
+  margin-top:10px;
 }
 .BtnForCart {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
+
   width: 140px;
   height: 43px;
-  left: 6px;
-  bottom: 0;
-  top: 23px;
+
   background: #ffffff;
   border: 1px solid #1d1f22;
-  box-sizing: border-box;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 0px 10px;
+
   cursor: pointer;
 }
 .BtnCheckOut {
@@ -279,16 +228,11 @@
   align-items: center;
   border: none;
   color: white;
-  position: relative;
+
   width: 140px;
   height: 43px;
-  left: 159px;
-  bottom: 20px;
+
   background: #5ece7b;
-  box-sizing: border-box;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 0px 10px;
+
   cursor: pointer;
 }

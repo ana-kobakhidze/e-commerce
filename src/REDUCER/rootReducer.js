@@ -16,8 +16,8 @@ const initialState = {
   orderData: JSON.parse(localStorage.getItem("order")) || [],
   tabName: "",
   cartClick: "",
-  productId: JSON.parse(localStorage.getItem("productId")) || [],
-  product: JSON.parse(localStorage.getItem("productItem")) || []
+  productId: JSON.parse(localStorage.getItem("productId")),
+  product: JSON.parse(localStorage.getItem("productItem")) || null
 };
 
 function rootReducer(state = initialState, action) {
@@ -52,6 +52,7 @@ function rootReducer(state = initialState, action) {
     case ACTION_TYPES.SAVE_PRODUCT_DATA: {
       return { ...state, product: action.data}
     }
+
     default:
       return state;
   }
