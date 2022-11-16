@@ -204,7 +204,9 @@ class PDP extends Component {
 
               <Button
                 styleButton={
-                  product.inStock && this.state.attributeIsSelected
+                  product.inStock && product.attributes.length >= 1 && this.state.attributeIsSelected
+                    ? styles.ActiveButton
+                    : product.inStock && product.attributes.length < 1 && !this.state.attributeIsSelected 
                     ? styles.ActiveButton
                     : styles.DisableButton
                 }

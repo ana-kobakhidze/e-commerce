@@ -84,14 +84,26 @@ class Plp extends Component {
     this.setState({ mouseEnter: true });
     localStorage.setItem("productId", JSON.stringify(id));
     this.props.currentProductId(id);
-    this.props.currentCartClick("PRODUCT_PAGE");
     this.props.navigate("/" + this.props.tabName + "/" + id)
 
   }
-  handleIconClick() {
-    this.props.currentCartClick("CART_ICON");
-    this.props.location.pathName ="/cart"
+  handleIconClick(id) {
+    const { categoryData } = this.state;
     this.setState({ mouseEnter: false });
+      const result = categoryData.products.forEach(product => {
+      if(product.id === id && product.attributes.length === 0){
+        let storedOrder = JSON.parse(localStorage.getItem("order")) || [];
+        storedOrder.push({...product, count: 1, currentPosition: 0});
+        this.props.saveOrderData(storedOrder);
+        localStorage.setItem("order", JSON.stringify(storedOrder));
+        return this.props.navigate("/cart");
+      }else{
+       return this.props.navigate("/" + this.props.tabName + "/" + id)
+      }
+
+    })
+    return result;
+
   }
 
   handleMouseEnter(id) {
@@ -134,7 +146,7 @@ class Plp extends Component {
                     {this.props.productId === item.id && (
                       <div
                         className={styles.CartIcon}
-                        onClick={() => this.handleIconClick()}
+                        onClick={() => this.handleIconClick(item.id)}
                       >
                         <div className={styles.CartCircle} />
                          <div className={styles.EmptyCart}></div>
@@ -185,14 +197,14 @@ const mapStateToProps = (state) => {
     currency: state.currency,
     tabName: state.tabName,
     productId: state.productId,
+    orderData: state.orderData
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     currentTabName: (name) => dispatch({ type: "SAVE_TABNAME", tabName: name }),
     currentProductId: (id) => dispatch({ type: "SAVE_PRODUCT_ID", id: id }),
-    currentCartClick: (event) =>
-      dispatch({ type: "SAVE_CARTICON_CLICK", clicked: event }),
+    saveOrderData: (data) => dispatch({type:"SAVE_ORDER_DATA", data: data})
   };
 };
 export default connect(

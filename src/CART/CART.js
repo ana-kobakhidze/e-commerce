@@ -10,10 +10,10 @@ class Cart extends Component {
     super(props);
     this.state = {
       orderData: null,
-      count: undefined
+      count: undefined,
     };
 
-    this.attributeSelectionHandler = this.attributeSelectionHandler.bind(this);
+    // this.attributeSelectionHandler = this.attributeSelectionHandler.bind(this);
     this.incrementHandler = this.incrementHandler.bind(this);
     this.decrementHandler = this.decrementHandler.bind(this);
     this.leftSliderHandler = this.leftSliderHandler.bind(this);
@@ -27,11 +27,10 @@ class Cart extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.setState({ orderData: this.props.orderData });
-      if(this.state.orderData.length <= 0){
-        this.props.navigate("/" + this.props.tabName)
+      if (this.state.orderData.length <= 0) {
+        this.props.navigate("/" + this.props.tabName);
       }
     }
-
   }
 
   saveOrder = (updatedOrderData) => {
@@ -40,63 +39,60 @@ class Cart extends Component {
     this.props.saveOrderData(updatedOrderData);
   };
 
-  attributeSelectionHandler = (productId, attributeId, itemId) => {
-    const { orderData } = this.state;
-    //find attribute in object tree, go back and update each node
-    const updatedOrderData = orderData.map((product) => {
-      if (product.id === productId) {
-        const updatedAttributes = product.attributes.map((attribute) => {
-          if (attribute.id === attributeId) {
-            const updatedItems = attribute.items.map((item) => {
-              return { ...item, isSelected: item.id === itemId };
-            });
-            return { ...attribute, items: updatedItems };
-          } else {
-            return { ...attribute };
-          }
-        });
-        return { ...product, attributes: updatedAttributes };
-      } else {
-        return { ...product };
-      }
-    });
-    this.saveOrder(updatedOrderData);
-  };
+  // attributeSelectionHandler = (productId, attributeId, itemId) => {
+  //   const { orderData } = this.state;
+  //   //find attribute in object tree, go back and update each node
+  //   const updatedOrderData = orderData.map((product) => {
+  //     if (product.id === productId) {
+  //       const updatedAttributes = product.attributes.map((attribute) => {
+  //         if (attribute.id === attributeId) {
+  //           const updatedItems = attribute.items.map((item) => {
+  //             return { ...item, isSelected: item.id === itemId };
+  //           });
+  //           return { ...attribute, items: updatedItems };
+  //         } else {
+  //           return { ...attribute };
+  //         }
+  //       });
+  //       return { ...product, attributes: updatedAttributes };
+  //     } else {
+  //       return { ...product };
+  //     }
+  //   });
+  //   this.saveOrder(updatedOrderData);
+  // };
 
   incrementHandler = (id) => {
     const { orderData } = this.state;
     const updatedOrderData = orderData.map((product) => {
-      if (product.id === id ) {
-        return { ...product, count: product.count + 1 }
+      if (product.id === id) {
+        return { ...product, count: product.count + 1 };
       } else {
         return { ...product };
       }
     });
     this.saveOrder(updatedOrderData);
-
   };
 
-  decrementHandler = (id) => {
+  decrementHandler = (id, attrValue) => {
     const { orderData } = this.state;
-    const updateOrderData = orderData.map((product, index) => {
+    const updateOrderData = orderData.map((product) => {
       if (product.id === id && product.count > 1) {
-        return  { ...product, count: product.count - 1 };
-      }else if(product.id === id && product.count === 1){
-        return  { ...product, count: 0 };
-      }
-      else{
-        return {...product}
+        return { ...product, count: product.count - 1 };
+      } else if (product.id === id && product.count === 1) {
+        return { ...product, count: 0 };
+      } else {
+        return { ...product };
       }
     });
-    this.saveOrder(updateOrderData) 
+    this.saveOrder(updateOrderData);
 
-    orderData.forEach( product => {
-      if (product.id === id && product.count === 1){
-        this.setState({count:1})
-        this.deleteButtonHandler(id)
-      } 
-    })
-
+    orderData.forEach((product) => {
+      if (product.id === id && product.count === 1) {
+        this.setState({ count: 1 });
+        this.deleteButtonHandler(attrValue);
+      }
+    });
   };
 
   getProductFromState = (id) => {
@@ -130,131 +126,138 @@ class Cart extends Component {
     this.saveOrder(updatedOrderData);
   };
 
-  deleteButtonHandler = (id) => {
+  deleteButtonHandler = (selectedAttr) => {
     const { orderData } = this.state;
-    const newArr = orderData.filter((item) => item.id !== id);
-    this.saveOrder(newArr)
+        const newArr = orderData.filter(p => p.attrValue !== selectedAttr);
+        this.saveOrder(newArr);
+
   };
 
   render() {
     let itemList = [];
     const { orderData } = this.props;
 
-
     if (orderData) {
       orderData.forEach((product, index) => {
         itemList.push(
           <div key={index}>
             <div className={styles.Product}>
-            <hr />
-            <div className={styles.ItemListWraper}>
-            <div className={styles.LeftRow}>
+              <hr />
+              <div className={styles.ItemListWraper}>
+                <div className={styles.LeftRow}>
+                  <p className={styles.BrandName}>{product.brand}</p>
+                  <p className={styles.ItemName}>{product.name}</p>
 
-              <p className={styles.BrandName}>{product.brand}</p>
-              <p className={styles.ItemName}>{product.name}</p>
+                  <p className={styles.ItemPrice}>
+                    {product.prices.map((price) => {
+                      let currentPriceCurrency;
+                      if (price.currency.symbol === this.props.currency) {
+                        currentPriceCurrency =
+                          this.props.currency + price.amount;
+                      }
+                      return currentPriceCurrency;
+                    })}
+                  </p>
 
-              <p className={styles.ItemPrice}>
-                {product.prices.map((price) => {
-                  let currentPriceCurrency;
-                  if (price.currency.symbol === this.props.currency) {
-                    currentPriceCurrency = this.props.currency + price.amount;
-                  }
-                  return currentPriceCurrency;
-                })}
-              </p>
-
-              {product.attributes &&
-                product.attributes.map((attribute) => {
-                  let attributeRenderableItems = [];
-                  const renderableItems = attribute.items.map((item, index) => {
-                    return item.isSelected ? (
-                      <button
-                        key={index}
-                        className={
-                          item.value[0] !== "#"
-                            ? styles.SelectedAttrBox
-                            : styles.colorAttrBox
+                  {product.attributes &&
+                    product.attributes.map((attribute) => {
+                      let attributeRenderableItems = [];
+                      const renderableItems = attribute.items.map(
+                        (item, index) => {
+                          return item.isSelected ? (
+                            <button
+                              key={index}
+                              className={
+                                item.value[0] !== "#"
+                                  ? styles.SelectedAttrBox
+                                  : styles.colorAttrBox
+                              }
+                              // onClick={() =>
+                              //   // this.attributeSelectionHandler(
+                              //   //   product.id,
+                              //   //   attribute.id,
+                              //   //   item.id
+                              //   // )
+                              // }
+                              style={{ backgroundColor: item.value }}
+                            >
+                              {item.value[0] === "#" ? null : item.value}
+                            </button>
+                          ) : (
+                            <button
+                              key={index}
+                              className={
+                                item.value[0] === "#"
+                                  ? styles.ColorAttrBoxSelected
+                                  : styles.attributeBoxOrg
+                              }
+                              // onClick={() =>
+                              //   // this.attributeSelectionHandler(
+                              //   //   product.id,
+                              //   //   attribute.id,
+                              //   //   item.id
+                              //   // )
+                              // }
+                              style={{ backgroundColor: item.value }}
+                            >
+                              {item.value[0] === "#" ? null : item.value}
+                            </button>
+                          );
                         }
-                        onClick={() =>
-                          this.attributeSelectionHandler(
-                            product.id,
-                            attribute.id,
-                            item.id
-                          )
-                        }
-                        style={{ backgroundColor: item.value }}
-                      >
-                        {item.value[0] === "#" ? null : item.value}
-                      </button>
-                    ) : (
-                      <button
-                        key={index}
-                        className={
-                          item.value[0] === "#"
-                            ? styles.ColorAttrBoxSelected
-                            : styles.attributeBoxOrg
-                        }
-                        onClick={() =>
-                          this.attributeSelectionHandler(
-                            product.id,
-                            attribute.id,
-                            item.id
-                          )
-                        }
-                        style={{ backgroundColor: item.value }}
-                      >
-                        {item.value[0] === "#" ? null : item.value}
-                      </button>
-                    );
-                  });
-                  attributeRenderableItems.push(
-                    <div
-                      className={styles.CategoryAttributesWraper}
-                      key={index}
-                    >
-                      <p className={styles.AttributesName}>
-                        {attribute.name.toUpperCase() + ":"}
-                      </p>
-                      <div className={styles.AttributesBoxWraper}>
-                      {renderableItems}
-                      </div>
-                    </div>
-                  );
-                  return attributeRenderableItems;
-                })}
+                      );
+                      attributeRenderableItems.push(
+                        <div
+                          className={styles.CategoryAttributesWraper}
+                          key={index}
+                        >
+                          <p className={styles.AttributesName}>
+                            {attribute.name.toUpperCase() + ":"}
+                          </p>
+                          <div className={styles.AttributesBoxWraper}>
+                            {renderableItems}
+                          </div>
+                        </div>
+                      );
+                      return attributeRenderableItems;
+                    })}
                 </div>
                 <div className={styles.MiddleRow}>
-                <div
-                className={styles.Increment}
-                onClick={() => this.incrementHandler(product.id)}
-              ></div>
+                  <div
+                    className={styles.Increment}
+                    onClick={() => this.incrementHandler(product.id)}
+                  ></div>
 
-              <p className={styles.Count}>{product.count}</p>
+                  <p className={styles.Count}>{product.count}</p>
 
-              <div
-                className={styles.Substract}
-                onClick={() => this.decrementHandler(product.id)}
-              ></div>
-              </div>
-              <div className={styles.RightRow}>
-              <img
-                className={styles.ProductImage}
-                src={product.gallery[product.currentPosition]}
-                alt="product"
-              />
-              <div className={styles.ArrowWrapper}>
-              {product.gallery.length > 1 && (
-                <div className={styles.LeftArrow} onClick={() => this.leftSliderHandler(product.id)}></div>
-              )}
+                  <div
+                    className={styles.Substract}
+                    onClick={() => this.decrementHandler(product.id, product.attrValue)}
+                  ></div>
+                </div>
+                <div className={styles.RightRow}>
+                  <img
+                    className={styles.ProductImage}
+                    src={product.gallery[product.currentPosition]}
+                    alt="product"
+                  />
+                  <div className={styles.ArrowWrapper}>
+                    {product.gallery.length > 1 && (
+                      <div
+                        className={styles.LeftArrow}
+                        onClick={() => this.leftSliderHandler(product.id)}
+                      ></div>
+                    )}
 
-              {product.gallery.length > 1 && (
-                <div className={styles.RightArrow} onClick={() => this.rightSliderHandler(product.id)}></div>
-              )}
-              </div>
-              </div>
+                    {product.gallery.length > 1 && (
+                      <div
+                        className={styles.RightArrow}
+                        onClick={() => this.rightSliderHandler(product.id)}
+                      ></div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
-
           </div>
         );
       });
@@ -262,16 +265,13 @@ class Cart extends Component {
 
     return (
       <div className={styles.CartWrapper}>
-
         <div className={styles.CartHeader}>
           <h1 className={styles.CartTitle}>CART</h1>
         </div>
-      <div className={styles.CartContent}>
-        {this.props.orderData ? itemList : null}
-      </div>
-      <div className={styles.CartFooter}>
-
-      </div>
+        <div className={styles.CartContent}>
+          {this.props.orderData ? itemList : null}
+        </div>
+        <div className={styles.CartFooter}></div>
       </div>
     );
   }
@@ -280,8 +280,7 @@ const mapStateToProps = (state) => {
   return {
     currency: state.currency,
     orderData: state.orderData,
-    tabName: state.tabName
-
+    tabName: state.tabName,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -289,7 +288,6 @@ const mapDispatchToProps = (dispatch) => {
     saveOrderData: (order) => {
       dispatch({ type: "SAVE_ORDER_DATA", data: order });
     },
-
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Cart));

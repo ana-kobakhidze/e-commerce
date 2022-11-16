@@ -15,18 +15,57 @@ class Button extends Component {
     );
 
     if (storedProductIndex === -1 && pdpData) {
-      storedOrder.push(pdpData);
+      let attrValue = [];
+      pdpData.attributes.forEach((attribute) => {
+        attribute.items.forEach((item) => {
+          if (item.isSelected) {
+            attrValue.push(item.value);
+          }
+        });
+      });
+      storedOrder.push({ ...pdpData, attrValue: attrValue });
     } else {
-      storedOrder[storedProductIndex] = pdpData;
+      let checkItemOne = [];
+      this.getSelectedAttributes(storedOrder[storedProductIndex], checkItemOne);
+      let checkItemTwo = [];
+      this.getSelectedAttributes(pdpData, checkItemTwo);
+      if (this.checkAttributeEquality(checkItemOne, checkItemTwo)) {
+        storedOrder[storedProductIndex] = pdpData;
+      } else {
+        let attrValue = [];
+        pdpData.attributes.forEach((attribute) => {
+          attribute.items.forEach((item) => {
+            if (item.isSelected) {
+              attrValue.push(item.value);
+            }
+          });
+        });
+        storedOrder.push({ ...pdpData, attrValue: attrValue });
+      }
     }
     this.props.saveOrderData(storedOrder);
     localStorage.setItem("order", JSON.stringify(storedOrder));
     this.setState({ redirect: true });
   };
+  getSelectedAttributes(data, arr) {
+    return data.attributes.forEach((attribute) => {
+      attribute.items.forEach((item) => {
+        arr.push(item.isSelected);
+      });
+    });
+  }
+  checkAttributeEquality(a, b) {
+    return (
+      Array.isArray(a) &&
+      Array.isArray(b) &&
+      a.length === b.length &&
+      a.every((val, index) => val === b[index])
+    );
+  }
 
   render() {
     if (this.state.redirect) {
-      return  <Navigate to="/cart" replace={true} />;
+      return <Navigate to="/cart" replace={true} />;
     }
     return (
       <button

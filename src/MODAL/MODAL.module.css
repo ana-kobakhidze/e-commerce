@@ -4,7 +4,7 @@
   display: flex;
   justify-content: flex-end;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   left: 0;
   top: 92px;
   width: 100%;
@@ -18,7 +18,11 @@
   padding: 13px;
   width: 17%;
   margin-right: 16%;
-  max-height: 677px;
+  display:flex;
+  flex-direction: column;
+  /* height:auto; */
+
+height:auto;
 
 }
 .ModalWindow{
