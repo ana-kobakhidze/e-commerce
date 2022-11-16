@@ -16,30 +16,18 @@ class Button extends Component {
 
     if (storedProductIndex === -1 && pdpData) {
       let attrValue = [];
-      pdpData.attributes.forEach((attribute) => {
-        attribute.items.forEach((item) => {
-          if (item.isSelected) {
-            attrValue.push(item.value);
-          }
-        });
-      });
+      this.getAttributeValues(pdpData, attrValue);
       storedOrder.push({ ...pdpData, attrValue: attrValue });
     } else {
-      let checkItemOne = [];
-      this.getSelectedAttributes(storedOrder[storedProductIndex], checkItemOne);
-      let checkItemTwo = [];
-      this.getSelectedAttributes(pdpData, checkItemTwo);
-      if (this.checkAttributeEquality(checkItemOne, checkItemTwo)) {
+      let storedItem = [];
+      this.getSelectedAttributes(storedOrder[storedProductIndex], storedItem);
+      let newItem = [];
+      this.getSelectedAttributes(pdpData, newItem);
+      if (this.checkAttributeEquality(storedItem, newItem)) {
         storedOrder[storedProductIndex] = pdpData;
       } else {
         let attrValue = [];
-        pdpData.attributes.forEach((attribute) => {
-          attribute.items.forEach((item) => {
-            if (item.isSelected) {
-              attrValue.push(item.value);
-            }
-          });
-        });
+        this.getAttributeValues(pdpData, attrValue);
         storedOrder.push({ ...pdpData, attrValue: attrValue });
       }
     }
@@ -47,6 +35,16 @@ class Button extends Component {
     localStorage.setItem("order", JSON.stringify(storedOrder));
     this.setState({ redirect: true });
   };
+
+  getAttributeValues(data, arr) {
+    return data.attributes.forEach((attribute) => {
+      attribute.items.forEach((item) => {
+        if (item.isSelected) {
+          arr.push(item.value);
+        }
+      });
+    });
+  }
   getSelectedAttributes(data, arr) {
     return data.attributes.forEach((attribute) => {
       attribute.items.forEach((item) => {
@@ -88,8 +86,6 @@ const mapDispatchToProps = (dispatch) => {
     saveOrderData: (order) => {
       dispatch({ type: "SAVE_ORDER_DATA", data: order });
     },
-    currentCartClick: (event) =>
-      dispatch({ type: "SAVE_CARTICON_CLICK", clicked: event }),
   };
 };
 

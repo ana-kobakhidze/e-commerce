@@ -179,7 +179,7 @@ class Modal extends Component {
                         key={index}
                         className={
                           item.value[0] === "#"
-                            ? styles.SelectedAttributeButton 
+                            ? styles.SelectedAttributeButton
                             : styles.AttributeButtonBox
                         }
                         onClick={() =>

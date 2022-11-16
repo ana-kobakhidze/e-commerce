@@ -39,28 +39,6 @@ class Cart extends Component {
     this.props.saveOrderData(updatedOrderData);
   };
 
-  // attributeSelectionHandler = (productId, attributeId, itemId) => {
-  //   const { orderData } = this.state;
-  //   //find attribute in object tree, go back and update each node
-  //   const updatedOrderData = orderData.map((product) => {
-  //     if (product.id === productId) {
-  //       const updatedAttributes = product.attributes.map((attribute) => {
-  //         if (attribute.id === attributeId) {
-  //           const updatedItems = attribute.items.map((item) => {
-  //             return { ...item, isSelected: item.id === itemId };
-  //           });
-  //           return { ...attribute, items: updatedItems };
-  //         } else {
-  //           return { ...attribute };
-  //         }
-  //       });
-  //       return { ...product, attributes: updatedAttributes };
-  //     } else {
-  //       return { ...product };
-  //     }
-  //   });
-  //   this.saveOrder(updatedOrderData);
-  // };
 
   incrementHandler = (id) => {
     const { orderData } = this.state;
@@ -128,9 +106,8 @@ class Cart extends Component {
 
   deleteButtonHandler = (selectedAttr) => {
     const { orderData } = this.state;
-        const newArr = orderData.filter(p => p.attrValue !== selectedAttr);
-        this.saveOrder(newArr);
-
+    const newArr = orderData.filter((p) => p.attrValue !== selectedAttr);
+    this.saveOrder(newArr);
   };
 
   render() {
@@ -164,40 +141,23 @@ class Cart extends Component {
                       let attributeRenderableItems = [];
                       const renderableItems = attribute.items.map(
                         (item, index) => {
-                          return item.isSelected ? (
+                          return (
                             <button
-                              key={index}
                               className={
-                                item.value[0] !== "#"
-                                  ? styles.SelectedAttrBox
-                                  : styles.colorAttrBox
+                                item.isSelected && item.value[0] === "#"
+                                  ? styles.SelectedColorAttrBox
+                                  : !item.isSelected &&
+                                    item.value === "#FFFFFF"
+                                  ? styles.WhiteBox
+                                  : !item.isSelected &&
+                                    item.value[0] === "#"
+                                  ? styles.ColorAttrBox
+                                  : !item.isSelected &&
+                                    item.value[0] !== "#"
+                                  ? styles.AttrBox
+                                  : styles.SelectedAttrBox
                               }
-                              // onClick={() =>
-                              //   // this.attributeSelectionHandler(
-                              //   //   product.id,
-                              //   //   attribute.id,
-                              //   //   item.id
-                              //   // )
-                              // }
-                              style={{ backgroundColor: item.value }}
-                            >
-                              {item.value[0] === "#" ? null : item.value}
-                            </button>
-                          ) : (
-                            <button
                               key={index}
-                              className={
-                                item.value[0] === "#"
-                                  ? styles.ColorAttrBoxSelected
-                                  : styles.attributeBoxOrg
-                              }
-                              // onClick={() =>
-                              //   // this.attributeSelectionHandler(
-                              //   //   product.id,
-                              //   //   attribute.id,
-                              //   //   item.id
-                              //   // )
-                              // }
                               style={{ backgroundColor: item.value }}
                             >
                               {item.value[0] === "#" ? null : item.value}
@@ -231,7 +191,9 @@ class Cart extends Component {
 
                   <div
                     className={styles.Substract}
-                    onClick={() => this.decrementHandler(product.id, product.attrValue)}
+                    onClick={() =>
+                      this.decrementHandler(product.id, product.attrValue)
+                    }
                   ></div>
                 </div>
                 <div className={styles.RightRow}>

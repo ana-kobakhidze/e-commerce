@@ -44,10 +44,7 @@
   margin-top: 21px;
   margin-bottom: 38px;
 }
-/* .Delete{
-  display:none;
 
-} */
 .Product:hover > .DeleteButton,
 .DeleteButton:hover {
   cursor: pointer;
@@ -178,54 +175,48 @@
   display: flex;
   justify-content: flex-start;
 }
-.SelectedAttrBox {
-  margin-right: 10px;
-  width: 63px;
-  height: 45px;
-  border: 1px solid #808080;
-  font-family: "Source Sans Pro";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 18px;
+.SelectedColorAttrBox, .ColorAttrBox, .WhiteBox {
+  border: 0.5px solid white;
   color: #a6a6a6;
-  background: #e8e8e8;
-  pointer-events: none;
-}
-.colorAttrBox {
-  margin-right: 10px;
-  width: 63px;
-  height: 45px;
   background-color: white;
-  color: #a6a6a6;
-  border: 2px solid #1d1f22;
-}
 
-.ColorAttrBoxSelected {
-  margin-right: 10px;
-  bottom: 20px;
-  width: 63px;
-  height: 45px;
-  background-color: white;
-  color: #a6a6a6;
+  width: 32px;
+  height: 32px;
+  margin-right:14px;
+}
+.WhiteBox{
   border: 1px solid #1d1f22;
 }
-.attributeBoxOrg {
-  margin-right: 10px;
-  width: 63px;
-  height: 45px;
-  background-color: white;
-  font-family: "Source Sans Pro";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 18px;
-  color: #242424;
-  border: 0.5px solid #1d1f22;
+.SelectedColorAttrBox {
+  border: 1px solid #5ECE7B;
+	padding: 1.5px;
+	background: white content-box;
+
 }
 
-.attributeBoxOrg:hover {
-  background-color: black;
-  color: white;
-  cursor: pointer;
+
+.SelectedAttrBox, .AttrBox{
+  width: 63px;
+  height: 45px;
+  margin-right:14px;
+
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+
+  border: 1px solid #808080;
+  color: #1D1F22;
+  background-color: white;
 }
+
+
+.AttrBox {
+  border: 1px solid #1D1F22;
+}
+.SelectedAttrBox{
+  color: white;
+  background-color: #1D1F22;
+}
+

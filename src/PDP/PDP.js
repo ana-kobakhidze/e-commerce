@@ -3,7 +3,6 @@ import { gql } from "@apollo/client";
 import withRouter from "../HOC/WithRouter";
 import { connect } from "react-redux";
 
-
 import styles from "./PDP.module.css";
 import Button from "../button/button";
 import { fetchExtendedProductAsync } from "./Utils";
@@ -68,15 +67,13 @@ class PDP extends Component {
   };
 
   attributeHandler = (parentId, attributeId) => {
-    let product = this.props.product
+    let product = this.props.product;
     const attributeParent = product.attributes.find(
       (parent) => parent.id === parentId
     );
-
     attributeParent.items.forEach((i) => {
       i.isSelected = i.id === attributeId;
     });
-
     this.setState({ product, attributeIsSelected: true });
   };
 
@@ -100,32 +97,33 @@ class PDP extends Component {
                 onMouseOver={(e) => this.handleImageHover(e.currentTarget.src)}
               />
             </div>
-          ) 
+          );
         })
       );
     }
-    if(product){
-      mainImage.push(product.inStock ? 
-                <img
-                  key={product.id}
-                  className={styles.MainImage}
-                  src={!imageClicked ? product.gallery[0] : hoverImage}
-                  alt={product.id}
-                />
-        :
+    if (product) {
+      mainImage.push(
+        product.inStock ? (
+          <img
+            key={product.id}
+            className={styles.MainImage}
+            src={!imageClicked ? product.gallery[0] : hoverImage}
+            alt={product.id}
+          />
+        ) : (
           <>
-                <img
-                  key={product.id}
-                  className={styles.MainImage}
-                  src={!imageClicked ? product.gallery[0] : hoverImage}
-                  alt={product.id}
-                />
-                <div className={styles.mainImageOverlay}>
-                  <p>OUT OF STOCK</p>
-                </div>
+            <img
+              key={product.id}
+              className={styles.MainImage}
+              src={!imageClicked ? product.gallery[0] : hoverImage}
+              alt={product.id}
+            />
+            <div className={styles.mainImageOverlay}>
+              <p>OUT OF STOCK</p>
+            </div>
           </>
         )
- 
+      );
     }
 
     let renderableAttributes = [];
@@ -136,26 +134,20 @@ class PDP extends Component {
             {item.name.toUpperCase() + ":"}
           </p>,
           item.items.map((element, index) => {
-            return element.isSelected ? (
+            return (
               <button
                 onClick={() => this.attributeHandler(item.id, element.id)}
                 className={
-                  element.value[0] !== "#"
-                    ? styles.SelectedBox
-                    : styles.colorBox
-                }
-                key={index}
-                style={{ backgroundColor: element.value }}
-              >
-                {item.name === "Color" ? null : element.value}
-              </button>
-            ) : (
-              <button
-                onClick={() => this.attributeHandler(item.id, element.id)}
-                className={
-                  element.value[0] === "#"
-                    ? styles.ColorBoxSelected
-                    : styles.attributeBox
+                      element.isSelected && element.value[0] === "#"
+                    ? styles.SelectedColorAttrBox
+                    : !element.isSelected && element.value === "#FFFFFF"
+                    ? styles.WhiteBox
+                    : !element.isSelected && element.value[0] === "#"
+                    ? styles.ColorAttrBox
+                    
+                    : !element.isSelected && element.value[0] !== "#"
+                    ? styles.AttrBox 
+                    : styles.SelectedAttrBox
                 }
                 key={index}
                 style={{ backgroundColor: element.value }}
@@ -171,13 +163,16 @@ class PDP extends Component {
     let price = [];
     if (product) {
       product.prices.forEach((item, index) => {
-        return item.currency.symbol === this.props.currency && price.push(
-          <div key={index}>
-            <p className={styles.Price}>PRICE:</p>
-            <p className={styles.PriceCurrency}>
-              {this.props.currency + item.amount}
-            </p>
-          </div>
+        return (
+          item.currency.symbol === this.props.currency &&
+          price.push(
+            <div key={index}>
+              <p className={styles.Price}>PRICE:</p>
+              <p className={styles.PriceCurrency}>
+                {this.props.currency + item.amount}
+              </p>
+            </div>
+          )
         );
       });
 
@@ -204,9 +199,13 @@ class PDP extends Component {
 
               <Button
                 styleButton={
-                  product.inStock && product.attributes.length >= 1 && this.state.attributeIsSelected
+                  product.inStock &&
+                  product.attributes.length >= 1 &&
+                  this.state.attributeIsSelected
                     ? styles.ActiveButton
-                    : product.inStock && product.attributes.length < 1 && !this.state.attributeIsSelected 
+                    : product.inStock &&
+                      product.attributes.length < 1 &&
+                      !this.state.attributeIsSelected
                     ? styles.ActiveButton
                     : styles.DisableButton
                 }
@@ -214,7 +213,7 @@ class PDP extends Component {
                 product={product}
               ></Button>
 
-              <p className={styles.Description}>{description} </p>
+              <p className={styles.Description}>{product.description} </p>
             </div>
           </>
         )}
@@ -226,7 +225,7 @@ const mapStateToProps = (state) => {
   return {
     currency: state.currency,
     productId: state.productId,
-    product: state.product
+    product: state.product,
   };
 };
 const mapDispatchToProps = (dispatch) => {

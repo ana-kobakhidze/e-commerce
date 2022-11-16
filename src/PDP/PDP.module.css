@@ -144,58 +144,50 @@
 
 }
 
-.SelectedBox {
-  border: 1px solid #808080;
+.SelectedColorAttrBox, .ColorAttrBox, .WhiteBox {
+  border: 0.5px solid white;
   color: #a6a6a6;
-  font-family: "Source Sans Pro";
+  background-color: white;
+
+  width: 32px;
+  height: 32px;
+  margin-right:14px;
+}
+.WhiteBox{
+  border: 1px solid #1d1f22;
+}
+.ColorAttrBox:hover, .WhiteBox:hover, .SelectedColorAttrBox {
+  border: 1px solid #5ECE7B;
+	padding: 1.5px;
+	background: white content-box;
+  cursor:pointer;
+}
+
+
+.SelectedAttrBox, .AttrBox{
+  width: 63px;
+  height: 45px;
+  margin-right:14px;
+
+  font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
-  width: 63px;
-  height: 45px;
-  margin-right:14px;
-  background: #e8e8e8;
-  pointer-events: "none";
-  cursor: pointer;
+
+  border: 1px solid #808080;
+  color: #1D1F22;
+  background-color: white;
 }
 
-.colorBox {
-  border: 2px solid #1d1f22;
-  color: #a6a6a6;
-  background-color: white;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  margin-right:14px;
-}
-.ColorBoxSelected {
-  border: 1px solid #1d1f22;
-  color: #a6a6a6;
-  background-color: white;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  margin-right:14px;
-}
-.attributeBox {
-  text-decoration: none;
-  font-family: "Source Sans Pro";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 18px;
-  border: 0.5px solid #1d1f22;
-  color: #a6a6a6;
-  background-color: white;
-  cursor: pointer;
-  width: 63px;
-  height: 45px;
-  margin-right:14px;
-}
 
-.attributeBox:hover {
-  background-color: black;
+.AttrBox {
+  border: 1px solid #1D1F22;
+}
+.AttrBox:hover, .SelectedAttrBox{
   color: white;
+  background-color: #1D1F22;
   cursor: pointer;
 }
+
+
