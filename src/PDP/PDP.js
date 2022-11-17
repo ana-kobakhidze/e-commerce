@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { gql } from "@apollo/client";
-import withRouter from "../HOC/WithRouter";
 import { connect } from "react-redux";
+import { Markup } from 'interweave';
 
+import withRouter from "../HOC/WithRouter";
 import styles from "./PDP.module.css";
 import Button from "../button/button";
 import { fetchExtendedProductAsync } from "./Utils";
@@ -46,6 +47,7 @@ class PDP extends Component {
       hoverImage: "",
       imageClicked: false,
       attributeIsSelected: false,
+      allAttributeIsSelected: false
     };
   }
 
@@ -73,14 +75,16 @@ class PDP extends Component {
     );
     attributeParent.items.forEach((i) => {
       i.isSelected = i.id === attributeId;
+      attributeParent.checked = true;
     });
-    this.setState({ product, attributeIsSelected: true });
+    let allChecked = product.attributes.every(attribute => attribute.checked === true)
+    this.setState({ product, attributeIsSelected: true, allAttributeIsSelected: allChecked});
   };
 
   render() {
     const { imageClicked, hoverImage } = this.state;
     let product = this.props.product;
-    let description;
+
     const imageList = [];
     const mainImage = [];
 
@@ -138,21 +142,20 @@ class PDP extends Component {
               <button
                 onClick={() => this.attributeHandler(item.id, element.id)}
                 className={
-                      element.isSelected && element.value[0] === "#"
+                      element.isSelected && item.type === "swatch"
                     ? styles.SelectedColorAttrBox
                     : !element.isSelected && element.value === "#FFFFFF"
                     ? styles.WhiteBox
-                    : !element.isSelected && element.value[0] === "#"
+                    : !element.isSelected && item.type === "swatch"
                     ? styles.ColorAttrBox
-                    
-                    : !element.isSelected && element.value[0] !== "#"
+                    : !element.isSelected && item.type !== "swatch"
                     ? styles.AttrBox 
                     : styles.SelectedAttrBox
                 }
                 key={index}
                 style={{ backgroundColor: element.value }}
               >
-                {item.name === "Color" ? null : element.value}
+                {item.type === "swatch" ? null : element.value}
               </button>
             );
           })
@@ -176,12 +179,7 @@ class PDP extends Component {
         );
       });
 
-      if (product) {
-        description = product.description
-          .replace(/<[^>]*>/g, " ")
-          .replace(/\s{2,}/g, " ")
-          .trim();
-      }
+
     }
 
     return (
@@ -201,11 +199,11 @@ class PDP extends Component {
                 styleButton={
                   product.inStock &&
                   product.attributes.length >= 1 &&
-                  this.state.attributeIsSelected
+                  this.state.allAttributeIsSelected
                     ? styles.ActiveButton
                     : product.inStock &&
                       product.attributes.length < 1 &&
-                      !this.state.attributeIsSelected
+                      !this.state.allAttributeIsSelected
                     ? styles.ActiveButton
                     : styles.DisableButton
                 }
@@ -213,7 +211,7 @@ class PDP extends Component {
                 product={product}
               ></Button>
 
-              <p className={styles.Description}>{product.description} </p>
+              <div className={styles.Description}><Markup content={product.description}/></div>
             </div>
           </>
         )}

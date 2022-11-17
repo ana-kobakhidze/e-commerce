@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@300&display=swap");
-.PdpWrapper{
+.PdpWrapper {
   display: flex;
   justify-content: space-between;
   width: 1260px;
@@ -14,7 +14,6 @@
   justify-content: space-between;
   margin-left: 10px;
   height: 597px;
-
 }
 .ImageList {
   width: 79px;
@@ -31,11 +30,11 @@
 }
 
 .MainImage {
-  position:absolute;
+  position: absolute;
   width: 610px;
   height: 515px;
   object-fit: contain;
-  z-index:1;
+  z-index: 1;
 }
 
 .mainImageOverlay {
@@ -46,7 +45,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position:absolute;
+  position: absolute;
   z-index: 1;
 }
 
@@ -54,13 +53,12 @@
   color: #393a42;
   font-size: 24px;
   line-height: 160%;
-  position:absolute;
+  position: absolute;
   z-index: 1;
 }
 
 .RightBar {
   width: 34%;
-
 }
 .Brand {
   font-family: Raleway;
@@ -85,7 +83,6 @@
   font-size: 18px;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
-
 }
 .Price {
   font-family: Roboto Condensed;
@@ -103,7 +100,6 @@
   font-weight: bold;
   font-size: 24px;
   line-height: 18px;
-
 }
 .ActiveButton {
   background-color: #5ece7b;
@@ -132,62 +128,82 @@
   width: 300px;
   pointer-events: none;
 }
-
 .Description {
-  font-family: Roboto;
+  width: 300px;
+  color: #1d1f22;
+  margin-top: 1rem;
+}
+.Description > span,
+.Description > span > p {
+  font-family: "Roboto";
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 159.96%;
-  color: #1d1f22;
-  width: 300px;
-
+}
+.Description > span > h1,
+.Description > span > h3 {
+  font-family: "Roboto";
 }
 
-.SelectedColorAttrBox, .ColorAttrBox, .WhiteBox {
+.Description > span > div > ul {
+  padding-left: 1rem;
+}
+
+.Description > span > div > ul > li > span {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 159.96%;
+}
+
+.SelectedColorAttrBox,
+.ColorAttrBox,
+.WhiteBox {
   border: 0.5px solid white;
   color: #a6a6a6;
   background-color: white;
 
   width: 32px;
   height: 32px;
-  margin-right:14px;
+  margin-right: 14px;
 }
-.WhiteBox{
+.WhiteBox {
   border: 1px solid #1d1f22;
 }
-.ColorAttrBox:hover, .WhiteBox:hover, .SelectedColorAttrBox {
-  border: 1px solid #5ECE7B;
-	padding: 1.5px;
-	background: white content-box;
-  cursor:pointer;
+.ColorAttrBox:hover,
+.WhiteBox:hover,
+.SelectedColorAttrBox {
+  border: 1px solid #5ece7b;
+  padding: 1.5px;
+  background: white content-box;
+  cursor: pointer;
 }
 
-
-.SelectedAttrBox, .AttrBox{
+.SelectedAttrBox,
+.AttrBox {
   width: 63px;
   height: 45px;
-  margin-right:14px;
+  margin-right: 14px;
 
-  font-family: 'Source Sans Pro';
+  font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
 
   border: 1px solid #808080;
-  color: #1D1F22;
+  color: #1d1f22;
   background-color: white;
 }
 
-
 .AttrBox {
-  border: 1px solid #1D1F22;
+  border: 1px solid #1d1f22;
 }
-.AttrBox:hover, .SelectedAttrBox{
+.AttrBox:hover,
+.SelectedAttrBox {
   color: white;
-  background-color: #1D1F22;
+  background-color: #1d1f22;
   cursor: pointer;
 }
-
-
