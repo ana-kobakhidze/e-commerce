@@ -1,12 +1,5 @@
 import { ACTION_TYPES } from "../Constants";
 
-// const productItem = () =>{
-//   const serialState = localStorage.getItem('productItem');
-//   if (serialState === null) {
-//     return undefined;
-//   }
-//   return JSON.parse(serialState);
-// }  
 
 const initialState = {
   currency: "$",

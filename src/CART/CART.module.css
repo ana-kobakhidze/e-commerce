@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300&display=swap");
-.CartWrapper{
+.CartWrapper {
   display: flex;
   flex-direction: column;
   margin-top: 53px;
@@ -10,7 +10,7 @@
   margin-bottom: 23px;
 }
 .CartTitle {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
@@ -29,7 +29,7 @@
 .DeleteButton {
   display: none;
 }
-.LeftRow{
+.LeftRow {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -92,7 +92,7 @@
   margin: 0 0 20px 0;
 }
 .AttributesName {
-  font-family: 'Roboto Condensed';
+  font-family: "Roboto Condensed";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -106,13 +106,12 @@
   padding-left: 53%;
   justify-content: space-between;
 }
-.Increment{
+.Increment {
   height: 45px;
   width: 45px;
   background: url("../assets/icons/plusSquareL.svg") no-repeat;
   cursor: pointer;
 }
-
 
 .Count {
   font-family: Raleway;
@@ -122,13 +121,13 @@
   line-height: 160%;
   color: #1d1f22;
 }
-.Substract{
+.Substract {
   height: 45px;
   width: 45px;
   background: url("../assets/icons/minusSquareL.svg") no-repeat;
   cursor: pointer;
 }
-.RightRow{
+.RightRow {
   width: 200px;
   height: 288px;
 }
@@ -140,7 +139,7 @@
   position: absolute;
   z-index: 0;
 }
-.ArrowWrapper{
+.ArrowWrapper {
   display: flex;
   position: relative;
   top: 248px;
@@ -149,71 +148,95 @@
   justify-content: flex-end;
 }
 .LeftArrow {
-  background:url('../assets/icons/leftArrow.svg') no-repeat;
-  width:24px;
-  height:24px;
+  background: url("../assets/icons/leftArrow.svg") no-repeat;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
-  margin-right:10px;
+  margin-right: 10px;
 }
 
 .RightArrow {
-  background:url('../assets/icons/rightArrow.svg') no-repeat;
-  width:24px;
-  height:24px;
+  background: url("../assets/icons/rightArrow.svg") no-repeat;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 }
 
 .CategoryAttributesWraper {
   display: flex;
   flex-direction: column;
-
 }
-.AttributesBoxWraper{
+.AttributesBoxWraper {
   display: flex;
   justify-content: flex-start;
 }
-.SelectedColorAttrBox, .ColorAttrBox, .WhiteBox {
+.SelectedColorAttrBox,
+.ColorAttrBox,
+.WhiteBox {
   border: 0.5px solid white;
   color: #a6a6a6;
   background-color: white;
 
   width: 32px;
   height: 32px;
-  margin-right:14px;
+  margin-right: 14px;
 }
-.WhiteBox{
+.WhiteBox {
   border: 1px solid #1d1f22;
 }
 .SelectedColorAttrBox {
-  border: 1px solid #5ECE7B;
-	padding: 1.5px;
-	background: white content-box;
-
+  border: 1px solid #5ece7b;
+  padding: 1.5px;
+  background: white content-box;
 }
 
-
-.SelectedAttrBox, .AttrBox{
+.SelectedAttrBox,
+.AttrBox {
   width: 63px;
   height: 45px;
-  margin-right:14px;
+  margin-right: 14px;
 
-  font-family: 'Source Sans Pro';
+  font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
 
   border: 1px solid #808080;
-  color: #1D1F22;
+  color: #1d1f22;
   background-color: white;
 }
 
-
 .AttrBox {
-  border: 1px solid #1D1F22;
+  border: 1px solid #1d1f22;
 }
-.SelectedAttrBox{
+.SelectedAttrBox {
   color: white;
-  background-color: #1D1F22;
+  background-color: #1d1f22;
+}
+.CartFooter > p {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1d1f22;
 }
 
+.CartFooter > p > strong {
+  font-weight: 700;
+  font-size: 24px;
+line-height: 24px;
+}
+.Total {
+  font-weight: 500 !important;
+}
+.CartFooter > button {
+  width: 279px;
+  height: 43px;
+
+  border: none;
+  background: #5ece7b;
+  color: white;
+  cursor: pointer;
+}

@@ -48,6 +48,8 @@ class Header extends Component {
     const { client } = this.props;
     if(this.props.showModal) {
       document.body.style.overflow = 'hidden'};
+
+      
     let productQuantityInOrder = [];
     if (orderData) {
       orderData.map((product) => {

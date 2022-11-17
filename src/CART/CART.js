@@ -109,11 +109,16 @@ class Cart extends Component {
     const newArr = orderData.filter((p) => p.attrValue !== selectedAttr);
     this.saveOrder(newArr);
   };
+  orderHandler = () => {
+    this.saveOrder([]);
+  }
 
   render() {
     let itemList = [];
     const { orderData } = this.props;
-
+    let tax = 0;
+    let quantity = 0;
+    let total = 0;
     if (orderData) {
       orderData.forEach((product, index) => {
         itemList.push(
@@ -144,23 +149,23 @@ class Cart extends Component {
                           return (
                             <button
                               className={
-                                item.isSelected && item.value[0] === "#"
+                                item.isSelected && attribute.type === "swatch"
                                   ? styles.SelectedColorAttrBox
                                   : !item.isSelected &&
                                     item.value === "#FFFFFF"
                                   ? styles.WhiteBox
                                   : !item.isSelected &&
-                                    item.value[0] === "#"
+                                  attribute.type === "swatch"
                                   ? styles.ColorAttrBox
                                   : !item.isSelected &&
-                                    item.value[0] !== "#"
+                                  attribute.type !== "swatch"
                                   ? styles.AttrBox
                                   : styles.SelectedAttrBox
                               }
                               key={index}
                               style={{ backgroundColor: item.value }}
                             >
-                              {item.value[0] === "#" ? null : item.value}
+                              {attribute.type === "swatch" ? null : item.value}
                             </button>
                           );
                         }
@@ -224,6 +229,15 @@ class Cart extends Component {
         );
       });
     }
+    orderData.forEach(product => {
+      quantity += product.count;
+      product.prices.map((price) => {
+        if (price.currency.symbol === this.props.currency) {
+          total += price.amount * product.count;
+        }
+      });
+      tax = 21/100 * total 
+    })
 
     return (
       <div className={styles.CartWrapper}>
@@ -233,7 +247,15 @@ class Cart extends Component {
         <div className={styles.CartContent}>
           {this.props.orderData ? itemList : null}
         </div>
-        <div className={styles.CartFooter}></div>
+        <div className={styles.CartFooter}>
+          <hr/>
+          <p>Tax 21%: <strong>{this.props.currency + tax.toFixed(2)}</strong></p>
+          <p>Quantity: <strong>{quantity}</strong></p>
+          <p className={styles.Total}>Total: <strong>{this.props.currency + total.toFixed(2)}</strong></p>
+          <button onClick={() => this.orderHandler()}>ORDER</button>
+
+
+        </div>
       </div>
     );
   }
