@@ -13,11 +13,8 @@ class Modal extends Component {
       redirect: false,
     };
 
-    this.attributeSelectionHandler = this.attributeSelectionHandler.bind(this);
     this.incrementHandler = this.incrementHandler.bind(this);
     this.decrementHandler = this.decrementHandler.bind(this);
-    this.leftSliderHandler = this.leftSliderHandler.bind(this);
-    this.rightSliderHandler = this.rightSliderHandler.bind(this);
   }
 
   componentDidMount() {
@@ -33,28 +30,6 @@ class Modal extends Component {
     this.props.saveOrderData(updatedOrderData);
   };
 
-  attributeSelectionHandler = (productId, attributeId, itemId) => {
-    const { orderData } = this.state;
-    const updatedOrderData = orderData.map((product) => {
-      if (product.id === productId) {
-        const updatedAttributes = product.attributes.map((attribute) => {
-          if (attribute.id === attributeId) {
-            const updatedItems = attribute.items.map((item) => {
-              return { ...item, isSelected: item.id === itemId };
-            });
-            return { ...attribute, items: updatedItems };
-          } else {
-            return { ...attribute };
-          }
-        });
-        return { ...product, attributes: updatedAttributes };
-      } else {
-        return { ...product };
-      }
-    });
-    this.saveOrder(updatedOrderData);
-  };
-
   incrementHandler = (id) => {
     const { orderData } = this.state;
     const updatedOrderData = orderData.map((product) => {
@@ -68,50 +43,34 @@ class Modal extends Component {
     this.saveOrder(updatedOrderData);
   };
 
-  decrementHandler = (id) => {
+  decrementHandler = (id, attrValue) => {
     const { orderData } = this.state;
-    const updatedOrderData = orderData.map((product) => {
+    const updateOrderData = orderData.map((product) => {
       if (product.id === id && product.count > 1) {
         return { ...product, count: product.count - 1 };
+      } else if (product.id === id && product.count === 1) {
+        return { ...product, count: 0 };
       } else {
         return { ...product };
       }
     });
+    this.saveOrder(updateOrderData);
 
-    this.saveOrder(updatedOrderData);
+    orderData.forEach((product) => {
+      if (product.id === id && product.count === 1) {
+        this.setState({ count: 1 });
+        this.deleteButtonHandler(attrValue);
+      }
+    });
+  };
+  deleteButtonHandler = (selectedAttr) => {
+    const { orderData } = this.state;
+    const newArr = orderData.filter((p) => p.attrValue !== selectedAttr);
+    this.saveOrder(newArr);
   };
 
   getProductFromState = (id) => {
     return this.props.orderData.find((p) => p.id === id);
-  };
-
-  leftSliderHandler = (id) => {
-    const { orderData } = this.state;
-    const updatedOrderData = orderData.map((product) => {
-      if (product.id === id && product.currentPosition > 0) {
-        return { ...product, currentPosition: product.currentPosition - 1 };
-      } else {
-        return { ...product };
-      }
-    });
-
-    this.saveOrder(updatedOrderData);
-  };
-
-  rightSliderHandler = (id) => {
-    const { orderData } = this.state;
-    const updatedOrderData = orderData.map((product) => {
-      if (
-        product.id === id &&
-        product.currentPosition < product.gallery.length - 2
-      ) {
-        return { ...product, currentPosition: product.currentPosition + 1 };
-      } else {
-        return { ...product };
-      }
-    });
-
-    this.saveOrder(updatedOrderData);
   };
 
   closeModal = (event) => {
@@ -133,7 +92,7 @@ class Modal extends Component {
   render() {
     let itemList = [];
     const { orderData } = this.state;
-
+    this.props.orderQuantity < 1 && this.props.displayModal();
     if (orderData) {
       orderData.forEach((product, index) => {
         itemList.push(
@@ -155,43 +114,23 @@ class Modal extends Component {
                 product.attributes.map((attribute) => {
                   let attributeRenderableItems = [];
                   const renderableItems = attribute.items.map((item, index) => {
-                    return item.isSelected ? (
+                    return (
                       <button
-                        key={index}
                         className={
-                          item.value[0] !== "#"
-                            ? styles.SelectedColorAttributeBox
-                            : styles.ColorAttributeBox
+                          item.isSelected && attribute.type === "swatch"
+                            ? styles.SelectedColorAttrBox
+                            : !item.isSelected && item.value === "#FFFFFF"
+                            ? styles.WhiteBox
+                            : !item.isSelected && attribute.type === "swatch"
+                            ? styles.ColorAttrBox
+                            : !item.isSelected && attribute.type !== "swatch"
+                            ? styles.AttrBox
+                            : styles.SelectedAttrBox
                         }
-                        onClick={() =>
-                          this.attributeSelectionHandler(
-                            product.id,
-                            attribute.id,
-                            item.id
-                          )
-                        }
+                        key={index}
                         style={{ backgroundColor: item.value }}
                       >
-                        {item.value[0] === "#" ? null : item.value}
-                      </button>
-                    ) : (
-                      <button
-                        key={index}
-                        className={
-                          item.value[0] === "#"
-                            ? styles.SelectedAttributeButton
-                            : styles.AttributeButtonBox
-                        }
-                        onClick={() =>
-                          this.attributeSelectionHandler(
-                            product.id,
-                            attribute.id,
-                            item.id
-                          )
-                        }
-                        style={{ backgroundColor: item.value }}
-                      >
-                        {item.value[0] === "#" ? null : item.value}
+                        {attribute.type === "swatch" ? null : item.value}
                       </button>
                     );
                   });
@@ -216,7 +155,7 @@ class Modal extends Component {
               <p className={styles.Counter}>{product.count}</p>
               <div
                 className={styles.Substract}
-                onClick={() => this.decrementHandler(product.id)}
+                onClick={() => this.decrementHandler(product.id, product.attrValue)}
               ></div>
             </div>
 
@@ -251,11 +190,11 @@ class Modal extends Component {
 
     return (
       <div className={styles.Modal} onClick={(event) => this.closeModal(event)}>
+        <div
+          className={styles.ModalClose}
+          onClick={(event) => this.closeModal(event)}
+        />
         <div className={styles.ModalContent}>
-          <div
-            className={styles.ModalClose}
-            onClick={(event) => this.closeModal(event)}
-          />
           <div className={styles.ModalWindow}>
             <div className={styles.ModalHeader}>
               <h1 className={styles.CartHeadline}>My Bag,</h1>
@@ -295,8 +234,7 @@ const mapStateToProps = (state) => {
     currency: state.currency,
     showModal: state.showModal,
     orderData: state.orderData,
-    cartClick: state.cartClick,
-    currencyDisable: state.currencyDisable,
+    tabName: state.tabName,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -310,8 +248,7 @@ const mapDispatchToProps = (dispatch) => {
     disableCurrencyButton: (event) => {
       dispatch({ type: "DISABLE_CURRENCY", disable: event });
     },
-    currentCartClick: (event) =>
-      dispatch({ type: "SAVE_CARTICON_CLICK", clicked: event }),
+
   };
 };
 

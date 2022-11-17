@@ -60,7 +60,6 @@ class Plp extends Component {
     let { category } = data;
     this.props.currentTabName(category.name);
     this.setState({ categoryData: category });
-    // this.props.params(this.props.tabName)
   }
 
   async componentDidUpdate() {

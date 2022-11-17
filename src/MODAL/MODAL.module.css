@@ -12,32 +12,26 @@
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
+
 }
 .ModalContent {
   background-color: #fefefe;
   padding: 13px;
-  width: 17%;
-  margin-right: 16%;
-  display:flex;
-  flex-direction: column;
-  /* height:auto; */
-
-height:auto;
-
-}
-.ModalWindow{
+  width: 19%;
+  margin-right: 12%;
   display: flex;
   flex-direction: column;
+  max-height: calc(100vh - 223px);
 }
-.Content{
+
+.Content {
   overflow: scroll;
-  max-height: 500px;
+  height: 440px;
 }
 .OrderList {
   display: flex;
   margin-top: 13%;
   justify-content: space-between;
-
 }
 .LeftRow {
   max-width: 136px;
@@ -99,7 +93,7 @@ height:auto;
 }
 
 .AttributeName {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -110,52 +104,51 @@ height:auto;
   justify-content: flex-start;
 }
 
-
-.ColorAttributeBox {
-  width: 16px;
-  height: 16px;
+.SelectedColorAttrBox,
+.ColorAttrBox,
+.WhiteBox {
+  border: 0.5px solid white;
   color: #a6a6a6;
-  border: 2px solid #1d1f22;
-  margin-right: 10px;
-}
-.SelectedColorAttributeBox {
-  height: 16px;
-  width: 16px;
-
   background-color: white;
-  color: #a6a6a6;
-  border: 1px solid #1d1f22;
-  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+  margin-right: 3px;
 }
-/* border: 1px solid #5ECE7B; */
-.SelectedAttributeButton {
+.WhiteBox {
+  border: 1px solid #1d1f22;
+}
+.SelectedColorAttrBox {
+  border: 1px solid #5ece7b;
+  padding: 1.5px;
+  background: white content-box;
+}
+
+.SelectedAttrBox,
+.AttrBox {
+  width: auto;
+  height: 24px;
+  margin-right: 5px;
+
   font-family: "Source Sans Pro";
   font-style: normal;
-  font-weight: normal;
-  height: 24px;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+
+  border: 1px solid #808080;
+  color: #1d1f22;
+  background-color: white;
+
+  display: flex;
+  justify-content: center;
+}
+
+.AttrBox {
+  border: 1px solid #1d1f22;
+}
+.SelectedAttrBox {
   color: white;
   background-color: #1d1f22;
-  border: 1px solid #808080;
-  pointer-events: none;
-  margin-right: 10px;
-}
-.AttributeButtonBox {
-  height: 24px;
-  position: relative;
-  font-family: "Source Sans Pro";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  background-color: white;
-  color: #1d1f22;
-  border: 0.5px solid #1d1f22;
-  margin-right: 10px;
-}
-.attributeButtonBox:hover {
-  background-color: black;
-  color: white;
-  cursor: pointer;
 }
 
 .Increment {
@@ -187,29 +180,30 @@ height:auto;
   object-fit: cover;
   object-position: 70% 100%;
 }
-.ModalFooter{
-  display:flex;
+.ModalFooter {
+  display: flex;
   flex-direction: column;
 }
-.TotalPrice{
-  display:flex;
+.TotalPrice {
+  display: flex;
   justify-content: space-between;
 }
-.Total, .TotalNumber{
-  font-family: 'Roboto';
+.Total,
+.TotalNumber {
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 18px;
   color: #1d1f22;
 }
-.TotalNumber{
+.TotalNumber {
   font-weight: 700;
 }
-.ButtonGroup{
-  display:flex;
+.ButtonGroup {
+  display: flex;
   justify-content: space-between;
-  margin-top:10px;
+  margin-top: 10px;
 }
 .BtnForCart {
   display: flex;

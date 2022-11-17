@@ -12,8 +12,6 @@ class Cart extends Component {
       orderData: null,
       count: undefined,
     };
-
-    // this.attributeSelectionHandler = this.attributeSelectionHandler.bind(this);
     this.incrementHandler = this.incrementHandler.bind(this);
     this.decrementHandler = this.decrementHandler.bind(this);
     this.leftSliderHandler = this.leftSliderHandler.bind(this);
@@ -23,7 +21,7 @@ class Cart extends Component {
   componentDidMount() {
     this.setState({ orderData: this.props.orderData });
   }
-  //needed because state can be mutated from modal window as well
+
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.setState({ orderData: this.props.orderData });
@@ -38,7 +36,6 @@ class Cart extends Component {
     this.setState({ orderData: updatedOrderData });
     this.props.saveOrderData(updatedOrderData);
   };
-
 
   incrementHandler = (id) => {
     const { orderData } = this.state;
@@ -129,7 +126,6 @@ class Cart extends Component {
                 <div className={styles.LeftRow}>
                   <p className={styles.BrandName}>{product.brand}</p>
                   <p className={styles.ItemName}>{product.name}</p>
-
                   <p className={styles.ItemPrice}>
                     {product.prices.map((price) => {
                       let currentPriceCurrency;
