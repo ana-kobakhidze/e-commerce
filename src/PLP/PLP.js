@@ -78,31 +78,28 @@ class Plp extends Component {
       this.setState({ categoryData: category });
     }
   }
-  
+
   handleClick(id) {
     this.setState({ mouseEnter: true });
     localStorage.setItem("productId", JSON.stringify(id));
     this.props.currentProductId(id);
-    this.props.navigate("/" + this.props.tabName + "/" + id)
-
+    this.props.navigate("/" + this.props.tabName + "/" + id);
   }
   handleIconClick(id) {
     const { categoryData } = this.state;
     this.setState({ mouseEnter: false });
-      const result = categoryData.products.forEach(product => {
-      if(product.id === id && product.attributes.length === 0){
+    const result = categoryData.products.forEach((product) => {
+      if (product.id === id && product.attributes.length === 0) {
         let storedOrder = JSON.parse(localStorage.getItem("order")) || [];
-        storedOrder.push({...product, count: 1, currentPosition: 0});
+        storedOrder.push({ ...product, count: 1, currentPosition: 0 });
         this.props.saveOrderData(storedOrder);
         localStorage.setItem("order", JSON.stringify(storedOrder));
         return this.props.navigate("/cart");
-      }else{
-       return this.props.navigate("/" + this.props.tabName + "/" + id)
+      } else {
+        return this.props.navigate("/" + this.props.tabName + "/" + id);
       }
-
-    })
+    });
     return result;
-
   }
 
   handleMouseEnter(id) {
@@ -148,7 +145,7 @@ class Plp extends Component {
                         onClick={() => this.handleIconClick(item.id)}
                       >
                         <div className={styles.CartCircle} />
-                         <div className={styles.EmptyCart}></div>
+                        <div className={styles.EmptyCart}></div>
                       </div>
                     )}
                   </div>
@@ -168,8 +165,7 @@ class Plp extends Component {
                   className={styles.ItemInfo}
                   onClick={() => this.handleClick(item.id)}
                 >
-
-                  <p className={styles.Name}>{item.brand + ' ' + item.name}</p>
+                  <p className={styles.Name}>{item.brand + " " + item.name}</p>
 
                   <p className={styles.Price}>
                     {this.props.currency + item.prices[0].amount}
@@ -182,13 +178,11 @@ class Plp extends Component {
       );
     }
     return (
-    <div className={styles.CategoryBody}>
-      {categoryTitle}
-      <div className={styles.CategoryListWrapper}>
-        {categoryList}
+      <div className={styles.CategoryBody}>
+        {categoryTitle}
+        <div className={styles.CategoryListWrapper}>{categoryList}</div>
       </div>
-    </div>
-    )
+    );
   }
 }
 const mapStateToProps = (state) => {
@@ -196,17 +190,14 @@ const mapStateToProps = (state) => {
     currency: state.currency,
     tabName: state.tabName,
     productId: state.productId,
-    orderData: state.orderData
+    orderData: state.orderData,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     currentTabName: (name) => dispatch({ type: "SAVE_TABNAME", tabName: name }),
     currentProductId: (id) => dispatch({ type: "SAVE_PRODUCT_ID", id: id }),
-    saveOrderData: (data) => dispatch({type:"SAVE_ORDER_DATA", data: data})
+    saveOrderData: (data) => dispatch({ type: "SAVE_ORDER_DATA", data: data }),
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(Plp));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Plp));

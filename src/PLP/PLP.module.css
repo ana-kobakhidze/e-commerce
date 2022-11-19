@@ -1,3 +1,7 @@
+:root {
+  --dark: #1d1f22;
+  --green: #5ece7b;
+}
 .CategoryBody {
   display: flex;
   flex-direction: column;
@@ -13,9 +17,9 @@
   font-size: 42px;
   padding-left: 11px;
   text-transform: capitalize;
-  color: #1d1f22;
+  color: var(--dark);
 }
-.CategoryListWrapper{
+.CategoryListWrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -24,7 +28,7 @@
   width: 1260px;
 }
 .ProductList {
-margin-bottom: 7%;
+  margin-bottom: 7%;
 }
 
 .ProductList:hover {
@@ -84,7 +88,7 @@ margin-bottom: 7%;
   left: 290px;
   top: 304px;
   border: none;
-  background-color: #5ece7b;
+  background-color: var(--green);
 
   border-radius: 50px;
 }
@@ -96,7 +100,7 @@ margin-bottom: 7%;
   position: absolute;
   left: 305px;
   top: 319px;
-  background: url('../assets/icons/EmptyCartWhite.svg')no-repeat;
+  background: url("../assets/icons/EmptyCartWhite.svg") no-repeat;
 }
 
 .ItemInfo {

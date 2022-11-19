@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300&display=swap");
+
+:root {
+  --dark: #1d1f22;
+  --green: #5ece7b;
+}
+
 .CartWrapper {
   display: flex;
   flex-direction: column;
@@ -64,7 +70,7 @@
   font-weight: 600;
   font-size: 30px;
   line-height: 27px;
-  color: #1d1f22;
+  color: var(--dark);
   margin: 0 0 20px 0;
 }
 
@@ -76,7 +82,7 @@
   line-height: 27px;
   display: flex;
   align-items: center;
-  color: #1d1f22;
+  color: var(--dark);
   margin: 0 0 20px 0;
 }
 
@@ -88,7 +94,7 @@
   line-height: 18px;
   display: flex;
   align-items: center;
-  color: #1d1f22;
+  color: var(--dark);
   margin: 0 0 20px 0;
 }
 .AttributesName {
@@ -97,7 +103,7 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
-  color: #1d1f22;
+  color: var(--dark);
 }
 .MiddleRow {
   display: flex;
@@ -119,7 +125,7 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 160%;
-  color: #1d1f22;
+  color: var(--dark);
 }
 .Substract {
   height: 45px;
@@ -182,10 +188,10 @@
   margin-right: 14px;
 }
 .WhiteBox {
-  border: 1px solid #1d1f22;
+  border: 1px solid var(--dark);
 }
 .SelectedColorAttrBox {
-  border: 1px solid #5ece7b;
+  border: 1px solid var(--green);
   padding: 1.5px;
   background: white content-box;
 }
@@ -203,16 +209,16 @@
   line-height: 18px;
 
   border: 1px solid #808080;
-  color: #1d1f22;
+  color: var(--dark);
   background-color: white;
 }
 
 .AttrBox {
-  border: 1px solid #1d1f22;
+  border: 1px solid var(--dark);
 }
 .SelectedAttrBox {
   color: white;
-  background-color: #1d1f22;
+  background-color: var(--dark);
 }
 .CartFooter > p {
   font-family: "Raleway";
@@ -220,13 +226,13 @@
   font-weight: 400;
   font-size: 24px;
   line-height: 28px;
-  color: #1d1f22;
+  color: var(--dark);
 }
 
 .CartFooter > p > strong {
   font-weight: 700;
   font-size: 24px;
-line-height: 24px;
+  line-height: 24px;
 }
 .Total {
   font-weight: 500 !important;
@@ -236,7 +242,7 @@ line-height: 24px;
   height: 43px;
 
   border: none;
-  background: #5ece7b;
+  background: var(--green);
   color: white;
   cursor: pointer;
 }

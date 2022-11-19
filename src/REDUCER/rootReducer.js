@@ -27,9 +27,6 @@ function rootReducer(state = initialState, action) {
     case ACTION_TYPES.SHOW_MODAL: {
       return { ...state, showModal: action.show };
     }
-    case ACTION_TYPES.SHOW_ITEM_QUANTITY: {
-      return { ...state, orderQuantity: action.quantity };
-    }
     case ACTION_TYPES.SAVE_ORDER_DATA: {
       return { ...state, orderData: action.data };
     }
@@ -38,9 +35,6 @@ function rootReducer(state = initialState, action) {
     }
     case ACTION_TYPES.SAVE_PRODUCT_ID: {
       return { ...state, productId: action.id }
-    }
-    case ACTION_TYPES.SAVE_CARTICON_CLICK: {
-      return { ...state, cartClick: action.clicked}
     }
     case ACTION_TYPES.SAVE_PRODUCT_DATA: {
       return { ...state, product: action.data}

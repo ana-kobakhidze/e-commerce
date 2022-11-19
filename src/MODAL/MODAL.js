@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 import withRouter from "../HOC/WithRouter";
 import styles from "./Modal.module.css";
 
-//TODO: Merge with Cart.js as they have the same body except maybe render
+
 class Modal extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      orderData: [],
       redirect: false,
     };
 
@@ -17,21 +16,21 @@ class Modal extends Component {
     this.decrementHandler = this.decrementHandler.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ orderData: this.props.orderData });
-  }
   componentDidUpdate() {
     this.state.redirect && this.redirectButtonHandler();
+    this.props.orderData.length < 1 && this.redirectButtonHandler()
   }
 
+  componentWillUnmount() {
+    if ( this.props.orderData.length < 1 ) this.props.saveOrderData([]);
+  }
   saveOrder = (updatedOrderData) => {
     localStorage.setItem("order", JSON.stringify(updatedOrderData));
-    this.setState({ orderData: updatedOrderData });
     this.props.saveOrderData(updatedOrderData);
   };
 
   incrementHandler = (id) => {
-    const { orderData } = this.state;
+    const { orderData } = this.props;
     const updatedOrderData = orderData.map((product) => {
       if (product.id === id) {
         return { ...product, count: product.count + 1 };
@@ -40,11 +39,11 @@ class Modal extends Component {
       }
     });
 
-    this.saveOrder(updatedOrderData);
+     this.saveOrder(updatedOrderData);
   };
 
   decrementHandler = (id, attrValue) => {
-    const { orderData } = this.state;
+    const { orderData } = this.props;
     const updateOrderData = orderData.map((product) => {
       if (product.id === id && product.count > 1) {
         return { ...product, count: product.count - 1 };
@@ -58,13 +57,13 @@ class Modal extends Component {
 
     orderData.forEach((product) => {
       if (product.id === id && product.count === 1) {
-        this.setState({ count: 1 });
         this.deleteButtonHandler(attrValue);
       }
     });
+    if(!this.props.showModal) {document.body.style.overflow = "auto"};
   };
   deleteButtonHandler = (selectedAttr) => {
-    const { orderData } = this.state;
+    const { orderData } = this.props;
     const newArr = orderData.filter((p) => p.attrValue !== selectedAttr);
     this.saveOrder(newArr);
   };
@@ -91,9 +90,8 @@ class Modal extends Component {
 
   render() {
     let itemList = [];
-    const { orderData } = this.state;
+    const { orderData } = this.props;
     this.props.orderQuantity < 1 && this.props.displayModal();
-    if (orderData) {
       orderData.forEach((product, index) => {
         itemList.push(
           <div className={styles.OrderList} key={index}>
@@ -155,7 +153,9 @@ class Modal extends Component {
               <p className={styles.Counter}>{product.count}</p>
               <div
                 className={styles.Substract}
-                onClick={() => this.decrementHandler(product.id, product.attrValue)}
+                onClick={() =>
+                  this.decrementHandler(product.id, product.attrValue)
+                }
               ></div>
             </div>
 
@@ -169,7 +169,6 @@ class Modal extends Component {
           </div>
         );
       });
-    }
 
     let priceArray = [];
     if (orderData && orderData.length > 0)
@@ -190,11 +189,11 @@ class Modal extends Component {
 
     return (
       <div className={styles.Modal} onClick={(event) => this.closeModal(event)}>
+        <div className={styles.ModalContent}>
         <div
           className={styles.ModalClose}
           onClick={(event) => this.closeModal(event)}
         />
-        <div className={styles.ModalContent}>
           <div className={styles.ModalWindow}>
             <div className={styles.ModalHeader}>
               <h1 className={styles.CartHeadline}>My Bag,</h1>
@@ -248,7 +247,6 @@ const mapDispatchToProps = (dispatch) => {
     disableCurrencyButton: (event) => {
       dispatch({ type: "DISABLE_CURRENCY", disable: event });
     },
-
   };
 };
 

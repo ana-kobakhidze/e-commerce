@@ -11,13 +11,25 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      orderData: []
+      orderData: [],
     };
     this.modalClickHandler = this.modalClickHandler.bind(this);
   }
 
   componentDidMount() {
     this.setState({ orderData: this.props.orderData });
+  }
+  componentDidUpdate(prevProps) {
+    let updatedOrder = this.props.orderData;
+    if (prevProps.orderData !== this.props.orderData) {
+      this.saveOrder(updatedOrder);
+    }
+    if (this.props.showModal) {
+      document.body.style.overflow = "hidden";
+    }
+  }
+  componentWillUnmount() {
+    if ( this.props.orderData.length < 1 ) this.props.saveOrderData([]);
   }
 
   saveOrder(updatedOrder) {
@@ -26,30 +38,23 @@ class Header extends Component {
     this.props.saveOrderData(updatedOrder);
   }
 
-  componentDidUpdate(prevProps) {
-    let updatedOrder = this.props.orderData;
-    if (prevProps !== this.props) {
-      this.saveOrder(updatedOrder);
-    }
-  }
-
   modalClickHandler() {
-    if (this.props.orderData.length >= 1) {
+    if (this.props.orderData.length >= 1 && this.props.showModal === false) {
       this.props.displayModal(true);
       if (this.props.toggleDropDown) {
         this.props.toggleDropDownButton(false);
       }
       this.props.disableCurrencyButton(true);
+    } else {
+      this.props.displayModal(false);
+      document.body.style.overflow = "auto";
     }
   }
 
   render() {
     const { orderData } = this.state;
     const { client } = this.props;
-    if(this.props.showModal) {
-      document.body.style.overflow = 'hidden'};
 
-      
     let productQuantityInOrder = [];
     if (orderData) {
       orderData.map((product) => {
@@ -66,14 +71,13 @@ class Header extends Component {
 
     return (
       <header className={styles.Header}>
-      {this.props.showModal && <Modal orderQuantity={orderQuantity} />}
+        {this.props.showModal && <Modal orderQuantity={orderQuantity} />}
         <CategoryLinks client={this.props.client} />
         <div className={styles.BrandIcon}></div>
 
         <div className={styles.Actions}>
           <Currency client={client} />
-          <div className={styles.Cart} onClick={this.modalClickHandler}>
-          </div>
+          <div className={styles.Cart} onClick={this.modalClickHandler}></div>
 
           {orderQuantity >= 1 && (
             <div
@@ -83,14 +87,11 @@ class Header extends Component {
               {orderQuantity.length === 1 ? (
                 <p className={styles.NumberOfCounter}>{orderQuantity}</p>
               ) : (
-                <p className={styles.NumberOfCounter}>
-                  {orderQuantity}
-                </p>
+                <p className={styles.NumberOfCounter}>{orderQuantity}</p>
               )}
             </div>
           )}
         </div>
-        
       </header>
     );
   }

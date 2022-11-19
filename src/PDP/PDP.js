@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { gql } from "@apollo/client";
 import { connect } from "react-redux";
-import { Markup } from 'interweave';
+import { Markup } from "interweave";
 
 import withRouter from "../HOC/WithRouter";
 import styles from "./PDP.module.css";
@@ -43,11 +43,9 @@ class PDP extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: null,
       hoverImage: "",
       imageClicked: false,
-      attributeIsSelected: false,
-      allAttributeIsSelected: false
+      allAttributeIsSelected: false,
     };
   }
 
@@ -58,7 +56,6 @@ class PDP extends Component {
       this.props.productId,
       PRODUCT_QUERY
     );
-    this.setState({ product: product });
     localStorage.setItem("productItem", JSON.stringify(product));
     this.props.saveProductData(product);
   }
@@ -77,8 +74,12 @@ class PDP extends Component {
       i.isSelected = i.id === attributeId;
       attributeParent.checked = true;
     });
-    let allChecked = product.attributes.every(attribute => attribute.checked === true)
-    this.setState({ product, attributeIsSelected: true, allAttributeIsSelected: allChecked});
+    let allChecked = product.attributes.every(
+      (attribute) => attribute.checked === true
+    );
+    this.setState({
+      allAttributeIsSelected: allChecked,
+    });
   };
 
   render() {
@@ -87,14 +88,13 @@ class PDP extends Component {
 
     const imageList = [];
     const mainImage = [];
-
     if (product) {
       imageList.push(
         product.gallery.map((image, index) => {
           return (
-            <div key={index}>
+            <div key={product.id + index}>
               <img
-                key={product.id}
+                key={index}
                 className={styles.ImageList}
                 src={image}
                 alt={product.id}
@@ -129,30 +129,29 @@ class PDP extends Component {
         )
       );
     }
-
     let renderableAttributes = [];
     if (product && product.attributes.length >= 1) {
-      product.attributes.forEach((item) => {
+      product.attributes.forEach((item, index) => {
         renderableAttributes.push(
-          <p className={styles.Size} key={item.id}>
+          <p className={styles.Size} key={item.id + index}>
             {item.name.toUpperCase() + ":"}
           </p>,
           item.items.map((element, index) => {
             return (
               <button
                 onClick={() => this.attributeHandler(item.id, element.id)}
+                key={element.value + index}
                 className={
-                      element.isSelected && item.type === "swatch"
+                  element.isSelected && item.type === "swatch"
                     ? styles.SelectedColorAttrBox
                     : !element.isSelected && element.value === "#FFFFFF"
                     ? styles.WhiteBox
                     : !element.isSelected && item.type === "swatch"
                     ? styles.ColorAttrBox
                     : !element.isSelected && item.type !== "swatch"
-                    ? styles.AttrBox 
+                    ? styles.AttrBox
                     : styles.SelectedAttrBox
                 }
-                key={index}
                 style={{ backgroundColor: element.value }}
               >
                 {item.type === "swatch" ? null : element.value}
@@ -169,7 +168,7 @@ class PDP extends Component {
         return (
           item.currency.symbol === this.props.currency &&
           price.push(
-            <div key={index}>
+            <div key={index + item.amount}>
               <p className={styles.Price}>PRICE:</p>
               <p className={styles.PriceCurrency}>
                 {this.props.currency + item.amount}
@@ -178,15 +177,11 @@ class PDP extends Component {
           )
         );
       });
-
-
     }
-
     return (
       <div className={styles.PdpWrapper}>
         <div className={styles.List}>{imageList}</div>
         <div className={styles.Main}>{mainImage}</div>
-
         {product && (
           <>
             <div className={styles.RightBar}>
@@ -211,7 +206,9 @@ class PDP extends Component {
                 product={product}
               ></Button>
 
-              <div className={styles.Description}><Markup content={product.description}/></div>
+              <div className={styles.Description}>
+                <Markup content={product.description} />
+              </div>
             </div>
           </>
         )}

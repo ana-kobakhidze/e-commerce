@@ -76,8 +76,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     currentTabName: (name) => dispatch({ type: "SAVE_TABNAME", tabName: name }),
-    currentCartClick: (event) =>
-      dispatch({ type: "SAVE_CARTICON_CLICK", clicked: event }),
     changeModalState: (bool) => dispatch({type: "SHOW_MODAL", show: bool})
   };
 };

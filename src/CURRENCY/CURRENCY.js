@@ -6,7 +6,7 @@ import styles from "./Currency.module.css";
 
 const DATA_QUERY = gql`
   query {
-    currencies{
+    currencies {
       label
       symbol
     }
@@ -17,7 +17,7 @@ class Currency extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currencies: undefined
+      currencies: undefined,
     };
     this.arrowClickHandler = this.arrowClickHandler.bind(this);
     this.closeClickHandler = this.closeClickHandler.bind(this);
@@ -34,9 +34,11 @@ class Currency extends Component {
   }
 
   arrowClickHandler() {
-    if(this.props.showModal){
+    if (this.props.showModal) {
       this.props.changeModalState(false);
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
+    } else {
+      this.props.toggleDropDownButton(true);
     }
     if (!this.props.currencyDisable) {
       const { toggleDropDown } = this.props;
@@ -66,20 +68,23 @@ class Currency extends Component {
             key={index}
             onClick={() => this.clickedCurrencyHandler(element)}
           >
-              {element.label + '  ' + element.symbol}
+            {element.label + "  " + element.symbol}
           </p>
         );
       });
 
     return (
       <div className={styles.CurrenyWrapper}>
-      <div className={toggleDropDown ? styles.Modal : ''} onClick={this.closeClickHandler}></div>
-        <p className={styles.Currency} onClick={this.arrowClickHandler}>
-          {this.props.currency}
-        </p>
-        
-        <div className={toggleDropDown ? styles.DownArrow : styles.UpArrow} onClick={this.arrowClickHandler}></div>
-
+        <div
+          className={toggleDropDown ? styles.Modal : ""}
+          onClick={this.closeClickHandler}
+        ></div>
+        <div className={styles.IconWrapper} onClick={this.arrowClickHandler}>
+          <p className={styles.Currency}>{this.props.currency}</p>
+          <div
+            className={toggleDropDown ? styles.DownArrow : styles.UpArrow}
+          ></div>
+        </div>
         {this.props.showModal === false && (
           <div className={styles.Background} onClick={this.closeClickHandler}>
             <div className={styles.DropDownBackground}>{dropDown}</div>
@@ -106,7 +111,7 @@ const mapDispatchToProps = (dispatch) => {
     toggleDropDownButton: (event) => {
       dispatch({ type: "CLOSE_DROPDOWN", toggle: event });
     },
-    changeModalState: (bool) => dispatch({type: "SHOW_MODAL", show: bool})
+    changeModalState: (bool) => dispatch({ type: "SHOW_MODAL", show: bool }),
   };
 };
 

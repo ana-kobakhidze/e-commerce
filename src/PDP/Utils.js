@@ -3,7 +3,6 @@ export const fetchExtendedProductAsync = async (
   productId,
   productQuery
 ) => {
-
   const product = await fetchProductFromServerAsync(
     client,
     productId,

@@ -1,11 +1,15 @@
- .CurrenyWrapper {
+:root {
+  --dark: #1d1f22;
+}
+
+.CurrenyWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   right: 10%;
- }
- .Modal {
+}
+.Modal {
   position: fixed;
   z-index: 1;
   left: 0;
@@ -13,58 +17,61 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  cursor:pointer;
-  background-color: rgba(0,0,0,0.0);
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+}
+.IconWrapper {
+  display: flex;
+  align-items: center;
+}
+.Currency {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  color: var(--dark);
+  padding: 0 10px;
+  flex: none;
+  cursor: pointer;
 }
 
- .Currency {
-   font-family: Raleway;
-   font-style: normal;
-   font-weight: 500;
-   font-size: 18px;
-   line-height: 160%;
-   color: #1d1f22;
-   padding: 0 10px;
-   flex: none;
-   cursor: pointer;
- }
-
- .DownArrow {
-   width:9px;
-   height:5px;
-   background: url('../assets/icons/downArrow.svg') no-repeat;
-   cursor: pointer;
- }
- .UpArrow{
-  width:9px;
-  height:5px;
-  background: url('../assets/icons/downArrow.svg') no-repeat;
+.DownArrow {
+  width: 9px;
+  height: 5px;
+  background: url("../assets/icons/downArrow.svg") no-repeat;
+  cursor: pointer;
+}
+.UpArrow {
+  width: 9px;
+  height: 5px;
+  background: url("../assets/icons/downArrow.svg") no-repeat;
   cursor: pointer;
   transform: rotate(3.142rad);
- }
+}
 
- .DropDownBackground {
-   position: absolute;
-   width: 114px;
-   right: 0;
-   left: -9px;
-   top: 3.5em;
-   border-radius: 0.2px;
-   background: white;
-   box-shadow: 0px 4px 35px rgb(168 172 176 / 19%);
-   display: flex;
-   flex-direction: column;
-   z-index: 200;
+.DropDownBackground {
+  position: absolute;
+  width: 114px;
+  right: 0;
+  left: -9px;
+  top: 3.5em;
+  border-radius: 0.2px;
+  background: white;
+  box-shadow: 0px 4px 35px rgb(168 172 176 / 19%);
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
 }
 
 .DropDownElements {
   text-align: center;
   cursor: pointer;
-  color: #1D1F22;
+  color: var(--dark);
   width: 100%;
   margin: 0;
   padding: 1em 0;
 }
-.DropDownElements:hover{
-  background-color: #EEEEEE;
+.DropDownElements:hover {
+  background-color: #eeeeee;
 }

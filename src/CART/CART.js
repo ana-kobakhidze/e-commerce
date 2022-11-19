@@ -4,7 +4,7 @@ import withRouter from "../HOC/WithRouter";
 
 import styles from "./Cart.module.css";
 
-//TODO: Think about merging it with Modal.js
+
 class Cart extends Component {
   constructor(props) {
     super(props);
@@ -108,7 +108,7 @@ class Cart extends Component {
   };
   orderHandler = () => {
     this.saveOrder([]);
-  }
+  };
 
   render() {
     let itemList = [];
@@ -116,124 +116,121 @@ class Cart extends Component {
     let tax = 0;
     let quantity = 0;
     let total = 0;
-    if (orderData) {
-      orderData.forEach((product, index) => {
-        itemList.push(
-          <div key={index}>
-            <div className={styles.Product}>
-              <hr />
-              <div className={styles.ItemListWraper}>
-                <div className={styles.LeftRow}>
-                  <p className={styles.BrandName}>{product.brand}</p>
-                  <p className={styles.ItemName}>{product.name}</p>
-                  <p className={styles.ItemPrice}>
-                    {product.prices.map((price) => {
-                      let currentPriceCurrency;
-                      if (price.currency.symbol === this.props.currency) {
-                        currentPriceCurrency =
-                          this.props.currency + price.amount;
-                      }
-                      return currentPriceCurrency;
-                    })}
-                  </p>
 
-                  {product.attributes &&
-                    product.attributes.map((attribute) => {
-                      let attributeRenderableItems = [];
-                      const renderableItems = attribute.items.map(
-                        (item, index) => {
-                          return (
-                            <button
-                              className={
-                                item.isSelected && attribute.type === "swatch"
-                                  ? styles.SelectedColorAttrBox
-                                  : !item.isSelected &&
-                                    item.value === "#FFFFFF"
-                                  ? styles.WhiteBox
-                                  : !item.isSelected &&
-                                  attribute.type === "swatch"
-                                  ? styles.ColorAttrBox
-                                  : !item.isSelected &&
-                                  attribute.type !== "swatch"
-                                  ? styles.AttrBox
-                                  : styles.SelectedAttrBox
-                              }
-                              key={index}
-                              style={{ backgroundColor: item.value }}
-                            >
-                              {attribute.type === "swatch" ? null : item.value}
-                            </button>
-                          );
-                        }
-                      );
-                      attributeRenderableItems.push(
-                        <div
-                          className={styles.CategoryAttributesWraper}
-                          key={index}
-                        >
-                          <p className={styles.AttributesName}>
-                            {attribute.name.toUpperCase() + ":"}
-                          </p>
-                          <div className={styles.AttributesBoxWraper}>
-                            {renderableItems}
-                          </div>
-                        </div>
-                      );
-                      return attributeRenderableItems;
-                    })}
-                </div>
-                <div className={styles.MiddleRow}>
-                  <div
-                    className={styles.Increment}
-                    onClick={() => this.incrementHandler(product.id)}
-                  ></div>
-
-                  <p className={styles.Count}>{product.count}</p>
-
-                  <div
-                    className={styles.Substract}
-                    onClick={() =>
-                      this.decrementHandler(product.id, product.attrValue)
+    orderData.forEach((product, index) => {
+      itemList.push(
+        <div key={index}>
+          <div className={styles.Product}>
+            <hr />
+            <div className={styles.ItemListWraper}>
+              <div className={styles.LeftRow}>
+                <p className={styles.BrandName}>{product.brand}</p>
+                <p className={styles.ItemName}>{product.name}</p>
+                <p className={styles.ItemPrice}>
+                  {product.prices.map((price) => {
+                    let currentPriceCurrency;
+                    if (price.currency.symbol === this.props.currency) {
+                      currentPriceCurrency = this.props.currency + price.amount;
                     }
-                  ></div>
-                </div>
-                <div className={styles.RightRow}>
-                  <img
-                    className={styles.ProductImage}
-                    src={product.gallery[product.currentPosition]}
-                    alt="product"
-                  />
-                  <div className={styles.ArrowWrapper}>
-                    {product.gallery.length > 1 && (
-                      <div
-                        className={styles.LeftArrow}
-                        onClick={() => this.leftSliderHandler(product.id)}
-                      ></div>
-                    )}
+                    return currentPriceCurrency;
+                  })}
+                </p>
 
-                    {product.gallery.length > 1 && (
+                {product.attributes &&
+                  product.attributes.map((attribute) => {
+                    let attributeRenderableItems = [];
+                    const renderableItems = attribute.items.map(
+                      (item, index) => {
+                        return (
+                          <button
+                            className={
+                              item.isSelected && attribute.type === "swatch"
+                                ? styles.SelectedColorAttrBox
+                                : !item.isSelected && item.value === "#FFFFFF"
+                                ? styles.WhiteBox
+                                : !item.isSelected &&
+                                  attribute.type === "swatch"
+                                ? styles.ColorAttrBox
+                                : !item.isSelected &&
+                                  attribute.type !== "swatch"
+                                ? styles.AttrBox
+                                : styles.SelectedAttrBox
+                            }
+                            key={index}
+                            style={{ backgroundColor: item.value }}
+                          >
+                            {attribute.type === "swatch" ? null : item.value}
+                          </button>
+                        );
+                      }
+                    );
+                    attributeRenderableItems.push(
                       <div
-                        className={styles.RightArrow}
-                        onClick={() => this.rightSliderHandler(product.id)}
-                      ></div>
-                    )}
-                  </div>
+                        className={styles.CategoryAttributesWraper}
+                        key={index}
+                      >
+                        <p className={styles.AttributesName}>
+                          {attribute.name.toUpperCase() + ":"}
+                        </p>
+                        <div className={styles.AttributesBoxWraper}>
+                          {renderableItems}
+                        </div>
+                      </div>
+                    );
+                    return attributeRenderableItems;
+                  })}
+              </div>
+              <div className={styles.MiddleRow}>
+                <div
+                  className={styles.Increment}
+                  onClick={() => this.incrementHandler(product.id)}
+                ></div>
+                <p className={styles.Count}>{product.count}</p>
+
+                <div
+                  className={styles.Substract}
+                  onClick={() =>
+                    this.decrementHandler(product.id, product.attrValue)
+                  }
+                ></div>
+              </div>
+              <div className={styles.RightRow}>
+                <img
+                  className={styles.ProductImage}
+                  src={product.gallery[product.currentPosition]}
+                  alt="product"
+                />
+                <div className={styles.ArrowWrapper}>
+                  {product.gallery.length > 1 && (
+                    <div
+                      className={styles.LeftArrow}
+                      onClick={() => this.leftSliderHandler(product.id)}
+                    ></div>
+                  )}
+
+                  {product.gallery.length > 1 && (
+                    <div
+                      className={styles.RightArrow}
+                      onClick={() => this.rightSliderHandler(product.id)}
+                    ></div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
-        );
-      });
-    }
-    orderData.forEach(product => {
+        </div>
+      );
+    });
+
+    orderData.forEach((product) => {
       quantity += product.count;
-      product.prices.map((price) => {
+      product.prices.forEach((price) => {
         if (price.currency.symbol === this.props.currency) {
           total += price.amount * product.count;
         }
       });
-      tax = 21/100 * total 
-    })
+      tax = (21 / 100) * total;
+    });
 
     return (
       <div className={styles.CartWrapper}>
@@ -244,13 +241,17 @@ class Cart extends Component {
           {this.props.orderData ? itemList : null}
         </div>
         <div className={styles.CartFooter}>
-          <hr/>
-          <p>Tax 21%: <strong>{this.props.currency + tax.toFixed(2)}</strong></p>
-          <p>Quantity: <strong>{quantity}</strong></p>
-          <p className={styles.Total}>Total: <strong>{this.props.currency + total.toFixed(2)}</strong></p>
+          <hr />
+          <p>
+            Tax 21%: <strong>{this.props.currency + tax.toFixed(2)}</strong>
+          </p>
+          <p>
+            Quantity: <strong>{quantity}</strong>
+          </p>
+          <p className={styles.Total}>
+            Total: <strong>{this.props.currency + total.toFixed(2)}</strong>
+          </p>
           <button onClick={() => this.orderHandler()}>ORDER</button>
-
-
         </div>
       </div>
     );

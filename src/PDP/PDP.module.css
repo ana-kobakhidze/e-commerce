@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@300&display=swap");
+
+:root {
+  --dark: #1d1f22;
+  --green: #5ece7b;
+}
+
 .PdpWrapper {
   display: flex;
   justify-content: space-between;
@@ -90,11 +96,11 @@
   font-weight: bold;
   font-size: 18px;
   line-height: 18px;
-  color: #1d1f22;
+  color: var(--dark);
   margin: 1.5em 0;
 }
 .PriceCurrency {
-  color: #1d1f22;
+  color: var(--dark);
   font-family: Raleway;
   font-style: normal;
   font-weight: bold;
@@ -102,7 +108,7 @@
   line-height: 18px;
 }
 .ActiveButton {
-  background-color: #5ece7b;
+  background-color: var(--green);
   color: white;
   display: flex;
   flex-direction: column;
@@ -114,7 +120,7 @@
   width: 300px;
 }
 .ActiveButton:hover {
-  background-color: #4ec16c;
+  background-color: var(--green);
 }
 .DisableButton {
   background-color: #d3d3d3;
@@ -130,7 +136,7 @@
 }
 .Description {
   width: 300px;
-  color: #1d1f22;
+  color: var(--dark);
   margin-top: 1rem;
 }
 .Description > span,
@@ -170,12 +176,12 @@
   margin-right: 14px;
 }
 .WhiteBox {
-  border: 1px solid #1d1f22;
+  border: 1px solid var(--dark);
 }
 .ColorAttrBox:hover,
 .WhiteBox:hover,
 .SelectedColorAttrBox {
-  border: 1px solid #5ece7b;
+  border: 1px solid var(--green);
   padding: 1.5px;
   background: white content-box;
   cursor: pointer;
@@ -194,16 +200,16 @@
   line-height: 18px;
 
   border: 1px solid #808080;
-  color: #1d1f22;
+  color: var(--dark);
   background-color: white;
 }
 
 .AttrBox {
-  border: 1px solid #1d1f22;
+  border: 1px solid var(--dark);
 }
 .AttrBox:hover,
 .SelectedAttrBox {
   color: white;
-  background-color: #1d1f22;
+  background-color: var(--dark);
   cursor: pointer;
 }
