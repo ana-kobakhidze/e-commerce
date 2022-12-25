@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { gql } from "@apollo/client";
-import styles from "./CategoryLinks.module.css";
+import styles from "./Category-links.module.css";
 
 const DATA_QUERY = gql`
   query {
