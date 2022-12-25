@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300&display=swap");
+
+:root {
+  --dark: #1d1f22;
+  --green: #5ece7b;
+}
+
+.CartWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 53px;
+  padding-left: 22px;
+}
+.CartHeader {
+  margin-bottom: 23px;
+}
+.CartTitle {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  text-transform: uppercase;
+  margin-bottom: 23px;
+}
+.Hr {
+  position: relative;
+  width: 1217px;
+  height: 1px;
+  left: 0px;
+  top: 0px;
+  background: #e5e5e5;
+}
+.DeleteButton {
+  display: none;
+}
+.LeftRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.ItemListWraper {
+  display: flex;
+  width: 1240px;
+  justify-content: space-between;
+  margin-top: 21px;
+  margin-bottom: 38px;
+}
+
+.Product:hover > .DeleteButton,
+.DeleteButton:hover {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  width: 20px;
+  font-size: 10px;
+  height: 20px;
+  background-color: black;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+.BrandName {
+  width: 292px;
+  height: 27px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  color: var(--dark);
+  margin: 0 0 20px 0;
+}
+
+.ItemName {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  color: var(--dark);
+  margin: 0 0 20px 0;
+}
+
+.ItemPrice {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: var(--dark);
+  margin: 0 0 20px 0;
+}
+.AttributesName {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  color: var(--dark);
+}
+.MiddleRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 53%;
+  justify-content: space-between;
+}
+.Increment {
+  height: 45px;
+  width: 45px;
+  background: url("../assets/icons/plusSquareL.svg") no-repeat;
+  cursor: pointer;
+}
+
+.Count {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 160%;
+  color: var(--dark);
+}
+.Substract {
+  height: 45px;
+  width: 45px;
+  background: url("../assets/icons/minusSquareL.svg") no-repeat;
+  cursor: pointer;
+}
+.RightRow {
+  width: 200px;
+  height: 288px;
+}
+.ProductImage {
+  height: 288px;
+  width: 200px;
+  object-fit: contain;
+
+  position: absolute;
+  z-index: 0;
+}
+.ArrowWrapper {
+  display: flex;
+  position: relative;
+  top: 248px;
+  right: 28px;
+  z-index: 1;
+  justify-content: flex-end;
+}
+.LeftArrow {
+  background: url("../assets/icons/leftArrow.svg") no-repeat;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.RightArrow {
+  background: url("../assets/icons/rightArrow.svg") no-repeat;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.CategoryAttributesWraper {
+  display: flex;
+  flex-direction: column;
+}
+.AttributesBoxWraper {
+  display: flex;
+  justify-content: flex-start;
+}
+.SelectedColorAttrBox,
+.ColorAttrBox,
+.WhiteBox {
+  border: 0.5px solid white;
+  color: #a6a6a6;
+  background-color: white;
+
+  width: 32px;
+  height: 32px;
+  margin-right: 14px;
+}
+.WhiteBox {
+  border: 1px solid var(--dark);
+}
+.SelectedColorAttrBox {
+  border: 1px solid var(--green);
+  padding: 1.5px;
+  background: white content-box;
+}
+
+.SelectedAttrBox,
+.AttrBox {
+  width: 63px;
+  height: 45px;
+  margin-right: 14px;
+
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+
+  border: 1px solid #808080;
+  color: var(--dark);
+  background-color: white;
+}
+
+.AttrBox {
+  border: 1px solid var(--dark);
+}
+.SelectedAttrBox {
+  color: white;
+  background-color: var(--dark);
+}
+.CartFooter > p {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--dark);
+}
+
+.CartFooter > p > strong {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+}
+.Total {
+  font-weight: 500 !important;
+}
+.CartFooter > button {
+  width: 279px;
+  height: 43px;
+
+  border: none;
+  background: var(--green);
+  color: white;
+  cursor: pointer;
+}

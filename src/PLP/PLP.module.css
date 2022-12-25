@@ -1,0 +1,139 @@
+:root {
+  --dark: #1d1f22;
+  --green: #5ece7b;
+}
+.CategoryBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 3em;
+  width: 1260px;
+}
+
+.CategoryTitle {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 42px;
+  padding-left: 11px;
+  text-transform: capitalize;
+  color: var(--dark);
+}
+.CategoryListWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  column-gap: 6%;
+  margin-top: 6em;
+  width: 1260px;
+}
+.ProductList {
+  margin-bottom: 7%;
+}
+
+.ProductList:hover {
+  box-shadow: 0 1px 10px #ccc;
+  cursor: pointer;
+}
+
+.ListWraper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 0;
+}
+.ListWraper .image_inStock .image_outOfStock {
+  padding: 10px;
+  text-align: center;
+}
+
+.ListWraper img {
+  padding: 10px;
+  text-align: center;
+  width: 369px;
+  height: 346px;
+  object-fit: cover;
+  object-position: top;
+}
+.Overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 369px;
+  height: 346px;
+  background: #ffffff;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Overlay p {
+  color: #8d8f9a;
+  font-size: 24px;
+  line-height: 160%;
+}
+.CartIcon :last-child {
+  z-index: 1;
+}
+
+.CartCircle {
+  z-index: 1;
+  filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.1));
+  position: absolute;
+  height: 52px;
+  width: 52px;
+  left: 290px;
+  top: 304px;
+  border: none;
+  background-color: var(--green);
+
+  border-radius: 50px;
+}
+
+.EmptyCart {
+  z-index: 2;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  left: 305px;
+  top: 319px;
+  background: url("../assets/icons/EmptyCartWhite.svg") no-repeat;
+}
+
+.ItemInfo {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.ItemInfo .Brand {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  padding: 0 10px;
+  margin: 0;
+}
+.ItemInfo .Name {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 160%;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.ItemInfo .Price {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  padding: 0 10px;
+  margin: 0;
+  margin-bottom: 25px;
+}

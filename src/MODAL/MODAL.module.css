@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Sans+Pro:wght@200;300&display=swap");
+
+:root {
+  --dark: #1d1f22;
+  --green: #5ece7b;
+}
+
+.Modal {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 92px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.ModalContent {
+  width: 20%;
+  margin-right: 12%;
+}
+.ModalWindow {
+  background-color: #fefefe;
+  padding: 13px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Content {
+  overflow: scroll;
+  max-height: 490px;
+}
+.OrderList {
+  display: flex;
+  margin-top: 13%;
+  justify-content: space-between;
+}
+.LeftRow {
+  max-width: 136px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.CartHeadline {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 160%;
+  text-align: left;
+  color: var(--dark);
+  display: inline;
+}
+.ItemQuantity {
+  font-family: Raleway;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 160%;
+  text-align: left;
+  color: var(--dark);
+  display: inline;
+  padding-left: 10px;
+}
+
+.NameOfBrand,
+.NameOfProduct {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  color: var(--dark);
+  margin: 0;
+}
+
+.PriceOfProduct {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  color: var(--dark);
+  margin: 0;
+}
+.MiddleRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.AttributesWraper {
+  display: flex;
+  flex-direction: column;
+  /* width: 82%; */
+}
+
+.AttributeName {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+.AttributesBoxWraper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.SelectedColorAttrBox,
+.ColorAttrBox,
+.WhiteBox {
+  border: 0.5px solid white;
+  color: #a6a6a6;
+  background-color: white;
+  width: 16px;
+  height: 16px;
+  margin-right: 3px;
+}
+.WhiteBox {
+  border: 1px solid var(--dark);
+}
+.SelectedColorAttrBox {
+  border: 1px solid var(--green);
+  padding: 1.5px;
+  background: white content-box;
+}
+
+.SelectedAttrBox,
+.AttrBox {
+  width: auto;
+  height: 24px;
+  margin-right: 5px;
+
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+
+  border: 1px solid #808080;
+  color: var(--dark);
+  background-color: white;
+
+  display: flex;
+  justify-content: center;
+}
+
+.AttrBox {
+  border: 1px solid var(--dark);
+}
+.SelectedAttrBox {
+  color: white;
+  background-color: var(--dark);
+}
+
+.Increment {
+  width: 24px;
+  height: 24px;
+  background: url("../assets/icons/plusSquare.svg") no-repeat;
+  cursor: pointer;
+}
+
+.Counter {
+  font-size: 16px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  color: var(--dark);
+}
+
+.Substract {
+  width: 24px;
+  height: 24px;
+  background: url("../assets/icons/minusSquare.svg") no-repeat;
+  cursor: pointer;
+}
+.ProductGallery {
+  height: 190px;
+  width: 121px;
+  object-fit: contain;
+}
+.ModalFooter {
+  display: flex;
+  flex-direction: column;
+}
+.TotalPrice {
+  display: flex;
+  justify-content: space-between;
+}
+.Total,
+.TotalNumber {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: var(--dark);
+}
+.TotalNumber {
+  font-weight: 700;
+}
+.ButtonGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.BtnForCart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 140px;
+  height: 43px;
+
+  background: #ffffff;
+  border: 1px solid var(--dark);
+
+  cursor: pointer;
+}
+.BtnCheckOut {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: white;
+
+  width: 140px;
+  height: 43px;
+
+  background: var(--green);
+
+  cursor: pointer;
+}

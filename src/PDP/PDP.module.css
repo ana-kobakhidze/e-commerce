@@ -1,0 +1,215 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@300&display=swap");
+
+:root {
+  --dark: #1d1f22;
+  --green: #5ece7b;
+}
+
+.PdpWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 1260px;
+  margin-top: 4.5em;
+}
+.List {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+  justify-content: space-between;
+  margin-left: 10px;
+  height: 597px;
+}
+.ImageList {
+  width: 79px;
+  height: 80px;
+  margin-bottom: 33px;
+  cursor: pointer;
+  object-fit: contain;
+}
+.Main {
+  object-fit: contain;
+  width: 610px;
+  height: 511px;
+  margin-right: 3em;
+}
+
+.MainImage {
+  position: absolute;
+  width: 610px;
+  height: 515px;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.mainImageOverlay {
+  width: 610px;
+  height: 515px;
+  background: #ffffff;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 1;
+}
+
+.mainImageOverlay p {
+  color: #393a42;
+  font-size: 24px;
+  line-height: 160%;
+  position: absolute;
+  z-index: 1;
+}
+
+.RightBar {
+  width: 34%;
+}
+.Brand {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  margin-top: 0;
+}
+.Name {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 27px;
+  margin: 0.5em 0;
+}
+.Size {
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.Price {
+  font-family: Roboto Condensed;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 18px;
+  color: var(--dark);
+  margin: 1.5em 0;
+}
+.PriceCurrency {
+  color: var(--dark);
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 18px;
+}
+.ActiveButton {
+  background-color: var(--green);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 32px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 300px;
+}
+.ActiveButton:hover {
+  background-color: var(--green);
+}
+.DisableButton {
+  background-color: #d3d3d3;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 32px;
+  border: none;
+  transition: 0.3s;
+  width: 300px;
+  pointer-events: none;
+}
+.Description {
+  width: 300px;
+  color: var(--dark);
+  margin-top: 1rem;
+}
+.Description > span,
+.Description > span > p {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 159.96%;
+}
+.Description > span > h1,
+.Description > span > h3 {
+  font-family: "Roboto";
+}
+
+.Description > span > div > ul {
+  padding-left: 1rem;
+}
+
+.Description > span > div > ul > li > span {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 159.96%;
+}
+
+.SelectedColorAttrBox,
+.ColorAttrBox,
+.WhiteBox {
+  border: 0.5px solid white;
+  color: #a6a6a6;
+  background-color: white;
+
+  width: 32px;
+  height: 32px;
+  margin-right: 14px;
+}
+.WhiteBox {
+  border: 1px solid var(--dark);
+}
+.ColorAttrBox:hover,
+.WhiteBox:hover,
+.SelectedColorAttrBox {
+  border: 1px solid var(--green);
+  padding: 1.5px;
+  background: white content-box;
+  cursor: pointer;
+}
+
+.SelectedAttrBox,
+.AttrBox {
+  width: 63px;
+  height: 45px;
+  margin-right: 14px;
+
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+
+  border: 1px solid #808080;
+  color: var(--dark);
+  background-color: white;
+}
+
+.AttrBox {
+  border: 1px solid var(--dark);
+}
+.AttrBox:hover,
+.SelectedAttrBox {
+  color: white;
+  background-color: var(--dark);
+  cursor: pointer;
+}
