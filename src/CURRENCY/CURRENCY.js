@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { gql } from "@apollo/client";
 import { connect } from "react-redux";
 
-import styles from "./Currency.module.css";
+import styles from "./CURRENCY.module.css";
 
 const DATA_QUERY = gql`
   query {

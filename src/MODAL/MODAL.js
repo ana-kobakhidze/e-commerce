@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import withRouter from "../HOC/WithRouter";
-import styles from "./Modal.module.css";
+import styles from "./MODAL.module.css";
 
 
 class Modal extends Component {

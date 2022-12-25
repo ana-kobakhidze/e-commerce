@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import withRouter from "../HOC/WithRouter";
 
-import styles from "./Cart.module.css";
+import styles from "./CART.module.css";
 
 
 class Cart extends Component {

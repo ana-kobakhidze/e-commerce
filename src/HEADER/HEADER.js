@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import styles from "./Header.module.css";
+import styles from "./HEADER.module.css";
 import CategoryLinks from "./Navigation/Category-links";
-import Currency from "../Currency/Currency";
-import Modal from "../Modal/Modal";
+import Currency from "../CURRENCY/CURRENCY";
+import Modal from "../MODAL/MODAL";
 
 class Header extends Component {
   constructor(props) {

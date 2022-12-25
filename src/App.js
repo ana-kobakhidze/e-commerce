@@ -8,10 +8,10 @@ import {
 import { connect } from "react-redux";
 import "./App.css";
 
-import Header from "./Header/Header";
+import Header from "./HEADER/HEADER";
 import PLP from "./PLP/PLP";
 import PDP from "../src/PDP/PDP";
-import CART from "./Cart/Cart";
+import CART from "./CART/CART";
 
 class App extends Component {
   render() {
