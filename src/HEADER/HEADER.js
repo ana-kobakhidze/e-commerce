@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import styles from "./Header.module.css";
-import CategoryLinks from "./Navigation/CategoryLinks";
+import CategoryLinks from "./Navigation/Category-links";
 import Currency from "../Currency/Currency";
 import Modal from "../Modal/Modal";
 

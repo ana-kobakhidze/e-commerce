@@ -11,7 +11,7 @@ import "./App.css";
 import Header from "./Header/Header";
 import PLP from "./PLP/PLP";
 import PDP from "../src/PDP/PDP";
-import CART from "../src/Cart/Cart";
+import CART from "./Cart/Cart";
 
 class App extends Component {
   render() {
