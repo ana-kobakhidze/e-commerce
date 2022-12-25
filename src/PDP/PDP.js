@@ -5,7 +5,7 @@ import { Markup } from "interweave";
 
 import withRouter from "../HOC/WithRouter";
 import styles from "./PDP.module.css";
-import Button from "../Button/Button";
+import Button from "../BUTTON/BUTTON";
 import { fetchExtendedProductAsync } from "./Utils";
 
 const PRODUCT_QUERY = gql`
